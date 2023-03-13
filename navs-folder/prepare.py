@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as pd 
 
 import os 
-from fuzzywuzzy import fuzz, process
+
 import re
 
 # ----cleaned_words------------------------
