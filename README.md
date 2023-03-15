@@ -17,7 +17,7 @@ Using publically visible data from Goodreads, Wikipedia and Amazon, this project
 
 
 
-## :flower: Data Overview  
+## :star2: Data Overview  
 
 * The data was obtained on 13 and 14 March 2023 using Python coding and the programming utilities BeautifulSoup and Selenium to programmatically acquire data from the public, third-party websites Goodreads, [Wikipedia](https://en.wikipedia.org/wiki/Lists_of_The_New_York_Times_fiction_best_sellers) and Amazon.    
 
@@ -57,9 +57,16 @@ Using publically visible data from Goodreads, Wikipedia and Amazon, this project
 #### :two:   Data Preparation
 
 <details>  
-    Missing values for book titles were manually imputed, based on the corresponding column's book summary. In cases when the number of pages was missing for a given book, the first-appearing hardcover book listed on Goodreads was used. Books in languages other than English were dropped, as were duplicates of a given title by the same author and books that only had an audiobook listing on Goodreads.
+    Missing values for book titles were manually imputed, based on the corresponding row's book summary. In cases when the number of pages or year of publication were missing for a given book, the earliest-appearing hardcover book listed on Goodreads was used. Books in languages other than English were dropped, as were duplicates of a given title by the same author and books that only had an audiobook listing on Goodreads.
     
-<summary> Data Cleaning</summary>
+<summary> After manual imputation, the acquired dataframes of random books were all concatenated, and turned into a final dataframe comprising 4137 rows and 11 columns before tidying. The NYT Best Sellers list comprised 1045 rows and 4 columns before tidying.
+    
+    Tidying included dropping any remaining null values, while deliberately in the collective dataframe keeping NYT Best Seller books that had missing values. The missing values were added in later, manually.
+    
+    After tidying, the random books dataframe comprised 3810 rows and 19 columns. Columns created included whether the book appeared on the NYT Best Seller list ('successful' or 'unsuccessful') and columns to hold normalized title, normalized book summary, lemmatized book summary, and the sentiment score based on the NLTK SentimentIntensityAnalyzer. Additional stopwords were introduced to the stopwords process.
+    
+    Final columns : title, summary, year_published, author, review_count, number_of_ratings, length, genre, rating, reviews, cleaned_title, cleaned_summary, target, lemmatized_summary, neg, neutral, pos, compound, sentiment.
+    </summary>
 
 </details>
 
@@ -100,3 +107,28 @@ Using publically visible data from Goodreads, Wikipedia and Amazon, this project
 To Reproduce:
 
 
+
+
+## Data Dictionary
+
+
+|Feature|              Definition|
+| :------|:------|
+        |**title**|            - title of the book |
+        |**summary**|          - official Goodreads summary of the book |                              
+|**year_published**|           - year of publication indicated on the main edition on Goodreads |
+|**author**|                   - author of the book|
+|**review_count**|             - total number of user reviews on Goodreads| 
+|**number_of_ratings**|        - total number of user star ratings on Goodreads|
+    |**length**|               - length, in pages, of book; if number of pages was missing, the number of pages in the earliest hardcover edition on Goodreads were used|
+|**rating**|                   - actual star rating from users, with 0 being the lowest and 5 the highest|
+|**reviews**|                  - text of publically available users' book reviews, when available, up to 10 per book|
+|**cleaned_title**|            - book title after normalizing, encoding, decoding and passing through a RegEx statement|
+|**cleaned_summary**|          - official Goodreads summary of the book after normalizing, encoding, decoding and passing through a RegEx statement|
+|**target**|                   - engineered feature indicating whether the book appeared ('successful' or 'unsuccessful'), since 1931, on the New York Times Best Seller list|
+|**lemmatized_summary**|       - lemmatized text of the official Goodreads summary of the book|
+            |**neg**|          - the negative leaning of the sentiment score, based on the official Goodreads summary of the book|
+        |**neutral**|          - the neutral position of the sentiment score, based on the official Goodreads summary of the book|
+            |**pos**|          - the positive leaning of the sentiment score, based on the official Goodreads summary of the book|
+        |**compound**|         - the a composite of the negative, neutral and positive sentiment scores |
+        |**sentiment**|        - a word-based indication of the overall sentiment of the official Goodreads summary of the book| 
