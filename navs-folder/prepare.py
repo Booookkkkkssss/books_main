@@ -19,6 +19,10 @@ def drop(df):
 
     # dropping duplicate titles
     df = df.drop_duplicates(subset= ['title'])
+    
+    df['summary'] = df['summary'].astype('string')
+    
+    return df
 
 
 
@@ -71,6 +75,8 @@ def clean_article(df, col_name):
         cleaned_summary = re.sub(r"[^a-z0-9',\s.]", '', cleaned_summary)
         cleaned_summaries.append(cleaned_summary)
     df[f'cleaned_{col_name}'] = cleaned_summaries
+    
+  
 
     
     
