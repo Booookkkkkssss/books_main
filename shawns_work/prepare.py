@@ -13,6 +13,32 @@ from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
+#---------------------------------------------
+
+def prep_data(filename):
+    
+    df = get_data(filename)
+    
+    clean_article(df, 'title')
+    clean_article(df, 'summary')
+    
+    df1 = pd.read_csv('books_feat_on_NYBS', index_col=0)
+    clean_article(df1, 'Book')
+    ser = df1['cleaned_Book']
+    
+    creat_tar(df, ser)
+    
+    df.loc[[3806], ['length']] = 320
+    df.loc[[3807], ['length']] = 407
+    df.loc[[3808], ['length']] = 368
+    df.loc[[3809], ['length']] = 920
+    
+    df['lemmatized_summary'] = df['cleaned_summary'].apply(lemmatize_text)
+    df[['neg', 'neutral', 'pos', 'compound']] = df['summary'].apply(feat_sent)
+    df['sentiment'] = df['compound'].apply(get_sentiment)
+    
+    return df
+
 #-----pulling_the_data----------------------
 
 def get_data(file):
