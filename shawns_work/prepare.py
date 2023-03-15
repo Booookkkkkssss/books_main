@@ -15,11 +15,11 @@ from nltk.tokenize import word_tokenize
 
 #-----pulling_the_data----------------------
 
-def get_data():
+def get_data(file):
     '''
     Will pull the current data from the 'almost_there' csv file, and prep it for deeper cleaning.
     '''
-    df = pd.read_csv('almost_there_edited.csv', index_col=0)
+    df = pd.read_csv(file, index_col=0)
     df = df.drop_duplicates(subset='title')
     
     save = ['Eleven on Top', 'Winter of the World', 'Nothing to Lose', 'Reflected in You']
