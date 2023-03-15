@@ -1,5 +1,5 @@
 import pandas as pd 
-import numpy as pd 
+import numpy as nd 
 
 import os
 import unicodedata
@@ -7,13 +7,43 @@ import re
 import json
 
 import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
+#-----pulling_the_data----------------------
+
+def get_data():
+    '''
+    Will pull the current data from the 'almost_there' csv file, and prep it for deeper cleaning.
+    '''
+    df = pd.read_csv('almost_there_edited.csv', index_col=0)
+    df = df.drop_duplicates(subset='title')
+    
+    save = ['Eleven on Top', 'Winter of the World', 'Nothing to Lose', 'Reflected in You']
+    sub = df[df['length'].isna()]
+    sub1 = sub[sub['title'].isin(save)]
+    df = df.dropna(subset='length')
+    df = pd.concat([df, sub1], axis=0)
+    
+    df = df.dropna(subset='summary')
+    df = df.dropna(subset='year_published')
+    
+    df = df.reset_index()
+    df = df.drop(columns=['index', 'book_tag'])
+    
+    df['summary'] = df['summary'].astype('string')
+    df['title'] = df['title'].astype('string')
+    df['author'] = df['author'].astype('string')
+    df['genre'] = df['genre'].astype('string')
+    df['length'] = df['length'].astype('float')
+
+    return df
+
 #-----create_target-------------------------
 
-# Creating target
 def creat_tar(df, ser):
     target_list = []
     for index, row in df.iterrows():
@@ -40,7 +70,8 @@ def clean_article(df, col_name):
         cleaned_summary = re.sub(r"[^a-z0-9',\s.]", '', cleaned_summary)
         cleaned_summaries.append(cleaned_summary)
     df[f'cleaned_{col_name}'] = cleaned_summaries
-
+    df[f'cleaned_{col_name}'].astype('string')
+    
 # -----lemmatize_and_Stopwords------------------------------
 
 def lemmatize_text(text):
@@ -55,6 +86,15 @@ def lemmatize_text(text):
     Returns:
         str: The lemmatized text.
     """
+    # Stop words
+    extra_stop_words = ['book', 'novel', 'work', 'title', 'character', 
+              'fuck', 'asshole', 'bitch', 'cunt', 'dick', 'fucking',
+             'fucker', 'pussy', 'fag', 'edition', 'story', 'tale', 'genre']
+    
+    stop_words = set(stopwords.words('english')) | set(extra_stop_words)
+    #intialize the lemmatizer
+    lemmatizer = WordNetLemmatizer()
+    
     # Tokenize the text and convert to lowercase
     tokens = word_tokenize(text.lower())
     
@@ -71,7 +111,6 @@ def lemmatize_text(text):
 
 #------------sentiment_mapping------
 
-# define a function to map compound values to sentiment labels
 def get_sentiment(compound):
     if compound <= -0.5:
         return 'very negative'
