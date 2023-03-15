@@ -56,7 +56,8 @@ Using publically visible data from Goodreads, Wikipedia and Amazon, this project
 
 #### :two:   Data Preparation
 
-<details> After acquisition, missing values were, in general, imputed manually following online research (we encountered various cases where the book's title had been registered as 'Loading...'). The duplicates, result of four team members acquiring potentially overlapping data, were dropped. 
+<details>  
+    Missing values for book titles were manually imputed, based on the corresponding column's book summary. In cases when the number of pages was missing for a given book, the first-appearing hardcover book listed on Goodreads was used. Books in languages other than English were dropped, as were duplicates of a given title by the same author and books that only had an audiobook listing on Goodreads.
     
 <summary> Data Cleaning</summary>
 
