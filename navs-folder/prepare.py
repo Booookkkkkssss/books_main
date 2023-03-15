@@ -1,91 +1,175 @@
 import pandas as pd 
-import numpy as pd 
+import numpy as nd 
 
-import os 
-
+import os
+import unicodedata
 import re
+import json
 
-# ----cleaned_words------------------------
+import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from nltk.tokenize.toktok import ToktokTokenizer
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize 
 
-def create_clean_words(df, ser):
+from sklearn.model_selection import train_test_split
+import sklearn.model_selection
+
+#------split---------------------------------------
+
+
+def split(df):
+    train, test = train_test_split(df, test_size=.2, random_state=42, stratify=df.target)
+    return train, test
+
+#-------All_in_One--------------------------------------
+
+def prep_data(filename):
     
+    df = get_data(filename)
     
-    # list of titles you want to cross refrence
-    norm_series = []
+    clean_article(df, 'title')
+    clean_article(df, 'summary')
     
-    for s in ser:
-        # Convert to lowercase
-        s = s.lower()
-        # Remove special characters
-        s = re.sub(r'[^a-zA-Z0-9\s]', '', s)
-        norm_series.append(s)
-        
-    df['clean_titles'] = norm_series
+    df1 = pd.read_csv('books_feat_on_NYBS', index_col=0)
+    clean_article(df1, 'Book')
+    ser = df1['cleaned_Book']
     
-    return df
-
-# my attempt at fuzzy wuzzy 
-'''# ----fuzzy_wuzzy------------------------
-
-# Define a function to find the best match between a title and a list of options using fuzzy string matching
-# I know I normalized but just to make sure let's use the fuzzywuzzy imports to help make sure we have as many matches as possible
-
-
-def find_best_match(title, options):
+    creat_tar(df, ser)
     
-    # Use the `extractOne()` function to find the best match
-    result = process.extractOne(title, options, scorer=fuzz.token_sort_ratio)
+    df.loc[[3806], ['length']] = 320
+    df.loc[[3807], ['length']] = 407
+    df.loc[[3808], ['length']] = 368
+    df.loc[[3809], ['length']] = 920
     
-    # If a match was found, return the best match and the matching score
-    if result is not None:
-        title, best_match, score = result
-        return best_match, score
-    # Otherwise, return default values
-    else:
-        return "", 0
-
-def create_tar(df, match_series):
-    
-    # Create an empty list to store the target labels
-    target_list = []
-
-    # Iterate over each row in the df dataframe
-    for index, row in df.iterrows():
-        # Find the best match between the clean_titles and the match_series
-        best_match, score = find_best_match(row['clean_titles'], match_series)
-        # If the matching score is above a certain threshold (e.g. 80), label the row as successful
-        if score >= 50:
-            target_list.append('Successful')
-        # Otherwise, label the row as unsuccessful
-        else:
-            target_list.append('Unsuccessful')
-
-    # Add the 'Target' column to the dataframe
-    df['Target'] = target_list
+    df['lemmatized_summary'] = df['cleaned_summary'].apply(lemmatize_text)
+    df[['neg', 'neutral', 'pos', 'compound']] = df['summary'].apply(feat_sent)
+    df['sentiment'] = df['compound'].apply(get_sentiment)
     
     return df
+
+#-----pulling_the_data----------------------
+
+def get_data(file):
     '''
+    Will pull the current data from the 'almost_there' csv file, and prep it for deeper cleaning.
+    '''
+    df = pd.read_csv(file, index_col=0)
+    df = df.drop_duplicates(subset='title')
+    
+    save = ['Eleven on Top', 'Winter of the World', 'Nothing to Lose', 'Reflected in You']
+    sub = df[df['length'].isna()]
+    sub1 = sub[sub['title'].isin(save)]
+    df = df.dropna(subset='length')
+    df = pd.concat([df, sub1], axis=0)
+    
+    df = df.dropna(subset='summary')
+    df = df.dropna(subset='year_published')
+    
+    df = df.reset_index()
+    df = df.drop(columns=['index', 'book_tag'])
+    
+    df['summary'] = df['summary'].astype('string')
+    df['title'] = df['title'].astype('string')
+    df['author'] = df['author'].astype('string')
+    df['genre'] = df['genre'].astype('string')
+    df['length'] = df['length'].astype('float')
 
-# Creating target
+    return df
+
+#-----create_target-------------------------
+
 def creat_tar(df, ser):
     target_list = []
     for index, row in df.iterrows():
-        if row['clean_titles'] in ser.tolist():
+        if row['cleaned_title'] in ser.tolist():
             target_list.append('best seller')
         else:
             target_list.append('unsuccessful')
 
     # Add the 'Target' column to the dataframe
-    df['Target'] = target_list
+    df['target'] = target_list
     
     return df
 
-    
+# -----clean_text---------------
 
-
+def clean_article(df, col_name):
+    cleaned_summaries = []
+    for summary in df[col_name]:
+        # Normalize the summary text and convert to lowercase
+        cleaned_summary = unicodedata.normalize('NFKD', summary)\
+            .encode('ascii', 'ignore')\
+            .decode('utf-8', 'ignore')\
+            .lower()
+        cleaned_summary = re.sub(r"[^a-z0-9',\s.]", '', cleaned_summary)
+        cleaned_summaries.append(cleaned_summary)
+    df[f'cleaned_{col_name}'] = cleaned_summaries
+    df[f'cleaned_{col_name}'].astype('string')
     
+# -----lemmatize_and_Stopwords------------------------------
+
+def lemmatize_text(text):
+    """
+    Lemmatizes input text using NLTK's WordNetLemmatizer.
+    This function first tokenizes the text, removes any non-alphabetic tokens, removes any stop words,
+    determines the part of speech of each token, and lemmatizes each token accordingly.
+    
+    Args:
+        text (str): The text to lemmatize.
         
+    Returns:
+        str: The lemmatized text.
+    """
+    # Stop words
+    extra_stop_words = ['book', 'novel', 'work', 'title', 'character', 
+              'fuck', 'asshole', 'bitch', 'cunt', 'dick', 'fucking',
+             'fucker', 'pussy', 'fag', 'edition', 'story', 'tale', 'genre','new','york','best','f']
+   
+    stop_words = set(stopwords.words('english')) | set(extra_stop_words)
+    #intialize the lemmatizer
+    lemmatizer = WordNetLemmatizer()
+    
+    # Tokenize the text and convert to lowercase
+    tokens = word_tokenize(text.lower())
+    
+    # Remove any non-alphabetic tokens and stop words
+    tokens = [token for token in tokens if token.isalpha() and token not in stop_words]
+    
+    # Determine the part of speech of each token and lemmatize accordingly
+    pos_tags = nltk.pos_tag(tokens)
+    lemmatized_tokens = [lemmatizer.lemmatize(token, pos=pos_tag[0].lower()) if pos_tag[0].lower() in ['a', 's', 'r', 'v'] else lemmatizer.lemmatize(token) for token, pos_tag in pos_tags]
+    
+    # Join the lemmatized tokens back into a string
+    lemmatized_text = ' '.join(lemmatized_tokens)
+    return lemmatized_text
 
+#------------sentiment_mapping------
 
-
+def get_sentiment(compound):
+    if compound <= -0.5:
+        return 'very negative'
+    elif compound < 0:
+        return 'negative'
+    elif compound >= 0.5:
+        return 'very positive'
+    elif compound > 0:
+        return 'positive'
+    else:
+        return 'neutral'
+    
+#------------feature_sentiment_score------
+    
+def feat_sent(text):
+    
+    # Initialize the VADER sentiment analyzer
+    analyzer = SentimentIntensityAnalyzer()
+    
+    book_synopsis = str(text)
+    
+    # get the sentiment scores for the synopsis
+    sentiment_scores = analyzer.polarity_scores(book_synopsis)
+    return pd.Series(sentiment_scores)
+    
     
