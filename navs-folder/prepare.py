@@ -11,6 +11,17 @@ from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
+
+#----------return_clean_dataframe---------
+def drop(df):
+    # drop unused columns( for now)
+    df = df.drop(columns= [ 'reviews','book_tag'])
+
+    # dropping duplicate titles
+    df = df.drop_duplicates(subset= ['title'])
+
+
+
 # ----cleaned_words------------------------
 
 def create_clean_words(df, ser):
@@ -95,6 +106,36 @@ def lemmatize_text(text):
     # Join the lemmatized tokens back into a string
     lemmatized_text = ' '.join(lemmatized_tokens)
     return lemmatized_text
+
+#------------sentiment_mapping------
+
+# define a function to map compound values to sentiment labels
+def get_sentiment(compound):
+    if compound <= -0.5:
+        return 'very negative'
+    elif compound < 0:
+        return 'negative'
+    elif compound >= 0.5:
+        return 'very positive'
+    elif compound > 0:
+        return 'positive'
+    else:
+        return 'neutral'
+    
+#------------feature_sentiment_score------
+    
+def feat_sent(text):
+    
+    # Initialize the VADER sentiment analyzer
+    analyzer = SentimentIntensityAnalyzer()
+    
+    book_synopsis = str(text)
+    
+    # get the sentiment scores for the synopsis
+    sentiment_scores = analyzer.polarity_scores(book_synopsis)
+    return pd.Series(sentiment_scores)
+    
+    
 
 
 
