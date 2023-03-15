@@ -1,5 +1,5 @@
 import pandas as pd 
-import numpy as pd 
+import numpy as nd 
 
 import os
 import unicodedata
@@ -7,58 +7,89 @@ import re
 import json
 
 import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize 
+
+from sklearn.model_selection import train_test_split
+import sklearn.model_selection
+
+#------split---------------------------------------
 
 
-#----------return_clean_dataframe---------
-def drop(df):
-    # drop unused columns( for now)
-    df = df.drop(columns= [ 'reviews','book_tag'])
+def split(df):
+    train, test = train_test_split(df, test_size=.2, random_state=42, stratify=df.target)
+    return train, test
 
-    # dropping duplicate titles
-    df = df.drop_duplicates(subset= ['title'])
+#-------All_in_One--------------------------------------
+
+def prep_data(filename):
+    
+    df = get_data(filename)
+    
+    clean_article(df, 'title')
+    clean_article(df, 'summary')
+    
+    df1 = pd.read_csv('books_feat_on_NYBS', index_col=0)
+    clean_article(df1, 'Book')
+    ser = df1['cleaned_Book']
+    
+    creat_tar(df, ser)
+    
+    df.loc[[3806], ['length']] = 320
+    df.loc[[3807], ['length']] = 407
+    df.loc[[3808], ['length']] = 368
+    df.loc[[3809], ['length']] = 920
+    
+    df['lemmatized_summary'] = df['cleaned_summary'].apply(lemmatize_text)
+    df[['neg', 'neutral', 'pos', 'compound']] = df['summary'].apply(feat_sent)
+    df['sentiment'] = df['compound'].apply(get_sentiment)
+    
+    return df
+
+#-----pulling_the_data----------------------
+
+def get_data(file):
+    '''
+    Will pull the current data from the 'almost_there' csv file, and prep it for deeper cleaning.
+    '''
+    df = pd.read_csv(file, index_col=0)
+    df = df.drop_duplicates(subset='title')
+    
+    save = ['Eleven on Top', 'Winter of the World', 'Nothing to Lose', 'Reflected in You']
+    sub = df[df['length'].isna()]
+    sub1 = sub[sub['title'].isin(save)]
+    df = df.dropna(subset='length')
+    df = pd.concat([df, sub1], axis=0)
+    
+    df = df.dropna(subset='summary')
+    df = df.dropna(subset='year_published')
+    
+    df = df.reset_index()
+    df = df.drop(columns=['index', 'book_tag'])
     
     df['summary'] = df['summary'].astype('string')
-    
+    df['title'] = df['title'].astype('string')
+    df['author'] = df['author'].astype('string')
+    df['genre'] = df['genre'].astype('string')
+    df['length'] = df['length'].astype('float')
+
     return df
 
+#-----create_target-------------------------
 
-
-# ----cleaned_words------------------------
-
-def create_clean_words(df, ser):
-    
-    
-    # list of titles you want to cross refrence
-    norm_series = []
-    
-    for s in ser:
-        # Convert to lowercase
-        s = s.lower()
-        # Remove special characters
-        s = re.sub(r'[^a-zA-Z0-9\s]', '', s)
-        norm_series.append(s)
-        
-    df['clean_titles'] = norm_series
-    
-    return df
-
-# my attempt at fuzzy wuzzy 
-
-
-# Creating target
 def creat_tar(df, ser):
     target_list = []
     for index, row in df.iterrows():
-        if row['clean_titles'] in ser.tolist():
+        if row['cleaned_title'] in ser.tolist():
             target_list.append('best seller')
         else:
             target_list.append('unsuccessful')
 
     # Add the 'Target' column to the dataframe
-    df['Target'] = target_list
+    df['target'] = target_list
     
     return df
 
@@ -75,16 +106,8 @@ def clean_article(df, col_name):
         cleaned_summary = re.sub(r"[^a-z0-9',\s.]", '', cleaned_summary)
         cleaned_summaries.append(cleaned_summary)
     df[f'cleaned_{col_name}'] = cleaned_summaries
+    df[f'cleaned_{col_name}'].astype('string')
     
-  
-
-    
-    
-'''nltk.download('averaged_perceptron_tagger')
-nltk.download('stopwords')
-nltk.download('wordnet')
-'''
-
 # -----lemmatize_and_Stopwords------------------------------
 
 def lemmatize_text(text):
@@ -99,6 +122,15 @@ def lemmatize_text(text):
     Returns:
         str: The lemmatized text.
     """
+    # Stop words
+    extra_stop_words = ['book', 'novel', 'work', 'title', 'character', 
+              'fuck', 'asshole', 'bitch', 'cunt', 'dick', 'fucking',
+             'fucker', 'pussy', 'fag', 'edition', 'story', 'tale', 'genre','new','york','best','f']
+   
+    stop_words = set(stopwords.words('english')) | set(extra_stop_words)
+    #intialize the lemmatizer
+    lemmatizer = WordNetLemmatizer()
+    
     # Tokenize the text and convert to lowercase
     tokens = word_tokenize(text.lower())
     
@@ -115,7 +147,6 @@ def lemmatize_text(text):
 
 #------------sentiment_mapping------
 
-# define a function to map compound values to sentiment labels
 def get_sentiment(compound):
     if compound <= -0.5:
         return 'very negative'
@@ -141,13 +172,4 @@ def feat_sent(text):
     sentiment_scores = analyzer.polarity_scores(book_synopsis)
     return pd.Series(sentiment_scores)
     
-    
-
-
-
-    
-        
-
-
-
     
