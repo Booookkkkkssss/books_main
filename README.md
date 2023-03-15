@@ -30,8 +30,8 @@ Using publically visible data from Goodreads, Wikipedia and Amazon, this project
     
 # :star2: Initial Questions
 
-1.  Which words (ngrams ?) appear more often in reviews with a positive sentiment ?  
-2.  Which words (ngrams ?) appear more often in reviews with a negative sentiment ? 
+1.  Which words (ngrams ?) appear more often in summaries with a positive sentiment ?  
+2.  Which words (ngrams ?) appear more often in summaries with a negative sentiment ? 
 3.  Do authors who appear once on the The New York Times Best Sellers list have a higher likelihood of repeat success ?  
 4.  Which leads to a higher chance of appearing on the The New York Times Best Sellers list : author + title, or author + publisher ?  
 
