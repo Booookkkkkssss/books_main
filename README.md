@@ -114,21 +114,21 @@ To Reproduce:
 
 |Feature|              Definition|  
 | :------|:------|  
-        |**title**|            - title of the book |  
-        |**summary**|          - official Goodreads summary of the book |                                
-|**year_published**|           - year of publication indicated on the main edition on Goodreads |  
-|**author**|                   - author of the book|  
-|**review_count**|             - total number of user reviews on Goodreads|   
-|**number_of_ratings**|        - total number of user star ratings on Goodreads|  
-    |**length**|               - length, in pages, of book; if number of pages was missing, the number of pages in the earliest hardcover edition on Goodreads were used|  
-|**rating**|                   - actual star rating from users, with 0 being the lowest and 5 the highest|  
-|**reviews**|                  - text of publically available users' book reviews, when available, up to 10 per book|  
-|**cleaned_title**|            - book title after normalizing, encoding, decoding and passing through a RegEx statement|  
-|**cleaned_summary**|          - official Goodreads summary of the book after normalizing, encoding, decoding and passing through a RegEx statement|  
-|**target**|                   - engineered feature indicating whether the book appeared ('successful' or 'unsuccessful'), since 1931, on the New York Times Best Seller list|  
-|**lemmatized_summary**|       - lemmatized text of the official Goodreads summary of the book|  
-            |**neg**|          - the negative leaning of the sentiment score, based on the official Goodreads summary of the book|  
-        |**neutral**|          - the neutral position of the sentiment score, based on the official Goodreads summary of the book|  
-            |**pos**|          - the positive leaning of the sentiment score, based on the official Goodreads summary of the book|  
-        |**compound**|         - the a composite of the negative, neutral and positive sentiment scores |  
-        |**sentiment**|        - a word-based indication of the overall sentiment of the official Goodreads summary of the book|   
+|**title**|            title of the book |  
+|**summary**|          official Goodreads summary of the book |                                
+|**year_published**|   year of publication indicated on the main edition on Goodreads |  
+|**author**|           author of the book|  
+|**review_count**|     total number of user reviews on Goodreads|   
+|**number_of_ratings**|total number of user star ratings on Goodreads|  
+|**length**|           length, in pages, of book; if number of pages was missing, the number of pages in the earliest hardcover edition on Goodreads were used|  
+|**rating**|           actual star rating from users, with 0 being the lowest and 5 the highest|  
+|**reviews**|          text of publically available users' book reviews, when available, up to 10 per book|  
+|**cleaned_title**|    book title after normalizing, encoding, decoding and passing through a RegEx statement|  
+|**cleaned_summary**|  official Goodreads summary of the book after normalizing, encoding, decoding and passing through a RegEx statement|  
+|**target**|           engineered feature indicating whether the book appeared ('successful' or 'unsuccessful'), since 1931, on the New York Times Best Seller list|  
+|**lemmatized_summary**|lemmatized text of the official Goodreads summary of the book|  
+|**neg**|          the negative leaning of the sentiment score, based on the official Goodreads summary of the book|  
+|**neutral**|     the neutral position of the sentiment score, based on the official Goodreads summary of the book|  
+|**pos**|          the positive leaning of the sentiment score, based on the official Goodreads summary of the book|  
+|**compound**|     the a composite of the negative, neutral and positive sentiment scores |  
+|**sentiment**|    a word-based indication of the overall sentiment of the official Goodreads summary of the book|   
