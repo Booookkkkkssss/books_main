@@ -63,7 +63,7 @@ Using publically visible data from Goodreads, Wikipedia and Amazon, this project
     
     Tidying included dropping any remaining null values, while deliberately in the collective dataframe keeping NYT Best Seller books that had missing values. The missing values were added in later, manually.
     
-    After tidying, the random books dataframe comprised 3810 rows and 19 columns. Columns created included whether the book appeared on the NYT Best Seller list ('successful' or 'unsuccessful') and columns to hold normalized title, normalized book summary, lemmatized book summary, and the sentiment score based on the NLTK SentimentIntensityAnalyzer. Additional stopwords were introduced to the stopwords process.
+    After tidying, the random books dataframe comprised 3810 rows and 19 columns. Columns created included whether the book appeared on the NYT Best Seller list ('bestseller' or 'unsuccessful') and columns to hold normalized title, normalized book summary, lemmatized book summary, and the sentiment score based on the NLTK SentimentIntensityAnalyzer. Additional stopwords were introduced to the stopwords process.
     
     Final columns : title, summary, year_published, author, review_count, number_of_ratings, length, genre, rating, reviews, cleaned_title, cleaned_summary, target, lemmatized_summary, neg, neutral, pos, compound, sentiment.
     </summary>
@@ -122,13 +122,13 @@ To Reproduce:
 |**number_of_ratings**|total number of user star ratings on Goodreads|  
 |**length**|           length, in pages, of book; if number of pages was missing, the number of pages in the earliest hardcover edition on Goodreads were used|  
 |**rating**|           actual star rating from users, with 0 being the lowest and 5 the highest|  
-|**reviews**|          text of publically available users' book reviews, when available, up to 10 per book|  
+|**reviews**|          text of users' publically available book reviews, when available, up to 10 per book|  
 |**cleaned_title**|    book title after normalizing, encoding, decoding and passing through a RegEx statement|  
 |**cleaned_summary**|  official Goodreads summary of the book after normalizing, encoding, decoding and passing through a RegEx statement|  
-|**target**|           engineered feature indicating whether the book appeared ('successful' or 'unsuccessful'), since 1931, on the New York Times Best Seller list|  
+|**target**|           engineered feature indicating whether the book appeared ('bestseller' or 'unsuccessful'), since 1931, on the New York Times Best Seller list|  
 |**lemmatized_summary**|lemmatized text of the official Goodreads summary of the book|  
-|**neg**|          the negative leaning of the sentiment score, based on the official Goodreads summary of the book|  
-|**neutral**|     the neutral position of the sentiment score, based on the official Goodreads summary of the book|  
-|**pos**|          the positive leaning of the sentiment score, based on the official Goodreads summary of the book|  
-|**compound**|     the a composite of the negative, neutral and positive sentiment scores |  
-|**sentiment**|    a word-based indication of the overall sentiment of the official Goodreads summary of the book|   
+|**neg**|          negative leaning of the sentiment score, based on the official Goodreads summary of the book|  
+|**neutral**|     neutral position of the sentiment score, based on the official Goodreads summary of the book|  
+|**pos**|          positive leaning of the sentiment score, based on the official Goodreads summary of the book|  
+|**compound**|     composite of the negative, neutral and positive sentiment scores, obtained using the NLTK SentimentIntensityAnalyzer|  
+|**sentiment**|    word-based indication of the overall sentiment of the official Goodreads summary of the book|   
