@@ -33,6 +33,11 @@ def prep_data(filename):
     df.loc[[3808], ['length']] = 368
     df.loc[[3809], ['length']] = 920
     
+    genre_counts = df['genre'].value_counts()
+    genres_to_remove = genre_counts[genre_counts < 8].index
+    # remove the rows with those genres "filtering"
+    df = df[~df['genre'].isin(genres_to_remove)]
+    
     df['lemmatized_summary'] = df['cleaned_summary'].apply(lemmatize_text)
     df[['neg', 'neutral', 'pos', 'compound']] = df['summary'].apply(feat_sent)
     df['sentiment'] = df['compound'].apply(get_sentiment)
@@ -74,7 +79,7 @@ def creat_tar(df, ser):
     target_list = []
     for index, row in df.iterrows():
         if row['cleaned_title'] in ser.tolist():
-            target_list.append('best seller')
+            target_list.append('bestseller')
         else:
             target_list.append('unsuccessful')
 
@@ -115,7 +120,7 @@ def lemmatize_text(text):
     # Stop words
     extra_stop_words = ['book', 'novel', 'work', 'title', 'character', 
               'fuck', 'asshole', 'bitch', 'cunt', 'dick', 'fucking',
-             'fucker', 'pussy', 'fag', 'edition', 'story', 'tale', 'genre']
+             'fucker', 'pussy', 'fag', 'edition', 'story', 'tale', 'genre', 'new york times', 'ny times', 'nyt']
     
     stop_words = set(stopwords.words('english')) | set(extra_stop_words)
     #intialize the lemmatizer
