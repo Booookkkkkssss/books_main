@@ -28,6 +28,7 @@ def prep_data(filename):
     
     creat_tar(df, ser)
     
+    
     df.loc[[3806], ['length']] = 320
     df.loc[[3807], ['length']] = 407
     df.loc[[3808], ['length']] = 368
@@ -70,7 +71,7 @@ def get_data(file):
     df['author'] = df['author'].astype('string')
     df['genre'] = df['genre'].astype('string')
     df['length'] = df['length'].astype('float')
-
+                                               
     return df
 
 #-----create_target-------------------------
@@ -79,13 +80,14 @@ def creat_tar(df, ser):
     target_list = []
     for index, row in df.iterrows():
         if row['cleaned_title'] in ser.tolist():
-            target_list.append('bestseller')
+            target_list.append(1)
         else:
-            target_list.append('unsuccessful')
+            target_list.append(0)
 
     # Add the 'Target' column to the dataframe
-    df['target'] = target_list
-    
+    df['successful'] = target_list
+    df['successful'] = df['successful'].astype(bool)
+
     return df
 
 # -----clean_text---------------
