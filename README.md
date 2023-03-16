@@ -30,10 +30,10 @@ Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, t
     
 # :star2: Initial Questions
 
-1.  Which words (ngrams ?) appear more often in summaries with a positive sentiment ?  
-2.  Which words (ngrams ?) appear more often in summaries with a negative sentiment ? 
-3.  Do authors who appear once on the The New York Times Best Sellers list have a higher likelihood of repeat success ?  
-4.  Which leads to a higher chance of appearing on the The New York Times Best Sellers list : author + title, or author + publisher ?  
+1.  Which words (ngrams?) appear more often in summaries with a positive sentiment?  
+2.  Which words (ngrams?) appear more often in summaries with a negative sentiment?  
+3.  Do authors who appear once on the The New York Times Best Sellers list have a higher likelihood of repeat success?   
+4.  Which leads to a higher chance of appearing on the The New York Times Best Sellers list : author + title, or author + publisher?  
 
 
 
@@ -41,9 +41,9 @@ Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, t
 #### :one:   Data Acquisition
 
 <details> <summary> Acquisition </summary>
-    Data was acquired using Python programming and associated libraries and utilities : pandas, NumPy, os, re, time, json, urllib, XPath, BeautifulSoup and Selenium.  
+Data was acquired using Python programming and associated libraries and utilities : pandas, NumPy, os, re, time, json, urllib, XPath, BeautifulSoup and Selenium.    
     
-    Issues encountered, and resolved, included locating accessible and reliable datasources, applying code across four different computing platforms and learning new data-accessing techniques.
+Issues encountered, and resolved, included locating accessible and reliable datasources, applying code across four different computing platforms and learning new data-accessing techniques.  
 
 </details>
 
@@ -58,18 +58,18 @@ Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, t
 
 <details>  
     <summary> 
-Missing values for book titles were manually imputed, based on the corresponding row's book summary. In cases when the number of pages or year of publication were missing for a given book, the earliest-appearing hardcover book listed on Goodreads was used. Books in languages other than English were dropped, as were duplicates of a given title by the same author and books that only had an audiobook listing on Goodreads. Genres with less than 8 titles were dropped, as were picture books.
+Missing values for book titles were manually imputed, based on the corresponding row's book summary. In cases when the number of pages or year of publication were missing for a given book, the earliest-appearing hardcover book listed on Goodreads was used. Books in languages other than English were dropped, as were duplicates of a given title by the same author and books that only had an audiobook listing on Goodreads. Genres with less than 8 titles were dropped, as were picture books.  
     </summary>
 </details>
     
 <details>    
-After manual imputation, the acquired dataframes of random books were all concatenated, and turned into a final dataframe comprising 3998 rows and 11 columns before tidying. The NYT Best Sellers list comprised 1045 rows and 4 columns before tidying.
+After manual imputation, the acquired dataframes of random books were all concatenated, and turned into a final dataframe comprising 3998 rows and 11 columns before tidying. The NYT Best Sellers list comprised 1045 rows and 4 columns before tidying.  
     
-Tidying included dropping any remaining null values, while deliberately in the collective dataframe keeping NYT Best Seller books that had missing values. The missing values were added in later, manually.
+Tidying included dropping any remaining null values, while deliberately in the collective dataframe keeping NYT Best Seller books that had missing values. The missing values were added in later, manually.  
     
-After tidying, the random books dataframe comprised 3686 rows and 19 columns. Columns created included whether the book appeared on the NYT Best Seller list ('bestseller' or 'unsuccessful') and columns to hold normalized title, normalized book summary, lemmatized book summary, and the sentiment score based on the NLTK SentimentIntensityAnalyzer. Additional stopwords were introduced to the stopwords process.
+After tidying, the random books dataframe comprised 3665 rows and 19 columns. Columns created included whether the book appeared on the NYT Best Seller list ('bestseller' or 'unsuccessful') and columns to hold normalized title, normalized book summary, lemmatized book summary, and the sentiment score based on the NLTK SentimentIntensityAnalyzer. Additional stopwords were introduced to the stopwords process.  
     
-Final columns : title, summary, year_published, author, review_count, number_of_ratings, length, genre, rating, reviews, cleaned_title, cleaned_summary, target, lemmatized_summary, neg, neutral, pos, compound, sentiment.
+Final columns : title, summary, year_published, author, review_count, number_of_ratings, length, genre, rating, reviews, cleaned_title, cleaned_summary, target, lemmatized_summary, neg, neutral, pos, compound, sentiment.  
    
 </details>
 
@@ -78,12 +78,12 @@ Final columns : title, summary, year_published, author, review_count, number_of_
 
 
 <details>
-<summary> Questions addressed:
-    1. What is the relationship between summary sentiment score and book length, between sentiment score and year_published?  
-    2. Does the lenght of a book have a relationship to its success?
-    3. Which words (ngrams?) appear more often in summaries with a negative sentiment?  
-    4. Which words (ngrams?) appear more often in summaries with a positive sentiment ? 
-    5. Which leads to a higher chance of appearing on the The New York Times Best Sellers list: author + title, or author + publisher?  
+<summary> Questions addressed:  
+    1. What is the relationship between summary sentiment score and book length, between sentiment score and year_published?   
+    2. Does the lenght of a book have a relationship to its success?  
+    3. Which words (ngrams?) appear more often in summaries with a negative sentiment?    
+    4. Which words (ngrams?) appear more often in summaries with a positive sentiment?   
+    5. Which leads to a higher chance of appearing on the The New York Times Best Sellers list: author + title, or author + publisher?    
     6. 
     </summary>
 
