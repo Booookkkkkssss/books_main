@@ -39,6 +39,8 @@ def prep_data(filename):
     # remove the rows with those genres "filtering"
     df = df[~df['genre'].isin(genres_to_remove)]
     
+    df = df[df['genre'] != 'Picture Books']
+    
     df['lemmatized_summary'] = df['cleaned_summary'].apply(lemmatize_text)
     df[['neg', 'neutral', 'pos', 'compound']] = df['summary'].apply(feat_sent)
     df['sentiment'] = df['compound'].apply(get_sentiment)
