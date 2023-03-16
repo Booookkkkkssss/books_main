@@ -12,8 +12,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
 import scipy.stats as stats
-from scipy.stats import pearsonr
-from scipy.stats import stats
+from scipy.stats import norm, binom, pearsonr
 from collections import Counter
 
 #-------------------------------------------------------
@@ -217,7 +216,7 @@ def chi_sq(a, b):
 
 # plotting all books : success vs page length
 
-def book_len_success():
+def book_len_success(train):
     
     '''
     this function uses the training dataset to plot 
