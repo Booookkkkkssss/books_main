@@ -96,7 +96,7 @@ def explore_question_2():
 
 def uni_id_best_seller(train):
 
-    best = train[train['successful'] == True] 
+    best = train[train['successful' == True] 
 
     best_words = pd.Series(' '.join(best.lemmatized_summary).split(' ')).value_counts()
     unsuccessful_words = pd.Series(' '.join(unsuccessful.lemmatized_summary).split(' ')).value_counts()

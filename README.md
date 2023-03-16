@@ -13,7 +13,7 @@
 
 # :star: Goal
 
-Using publically visible data from Goodreads, Wikipedia and Amazon, this project aims to acquire, explore and analyse information about books — their popularity, ratings, reviews, keywords, author name, publisher and more – to programmatically determine which factors lead to a book landing on the The New York Times Best Sellers list.
+Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, this project aims to acquire, explore and analyse information about books — their popularity, ratings, reviews, keywords, author name, publisher and more – to programmatically determine which factors lead to a book landing on the The New York Times Best Sellers list.
 
 
 
@@ -58,12 +58,14 @@ Using publically visible data from Goodreads, Wikipedia and Amazon, this project
 
 <details>  
     Missing values for book titles were manually imputed, based on the corresponding row's book summary. In cases when the number of pages or year of publication were missing for a given book, the earliest-appearing hardcover book listed on Goodreads was used. Books in languages other than English were dropped, as were duplicates of a given title by the same author and books that only had an audiobook listing on Goodreads.
+</details>
     
-<summary> After manual imputation, the acquired dataframes of random books were all concatenated, and turned into a final dataframe comprising 4137 rows and 11 columns before tidying. The NYT Best Sellers list comprised 1045 rows and 4 columns before tidying.
+<details>    
+<summary> After manual imputation, the acquired dataframes of random books were all concatenated, and turned into a final dataframe comprising 3998 rows and 11 columns before tidying. The NYT Best Sellers list comprised 1045 rows and 4 columns before tidying.
     
     Tidying included dropping any remaining null values, while deliberately in the collective dataframe keeping NYT Best Seller books that had missing values. The missing values were added in later, manually.
     
-    After tidying, the random books dataframe comprised 3810 rows and 19 columns. Columns created included whether the book appeared on the NYT Best Seller list ('bestseller' or 'unsuccessful') and columns to hold normalized title, normalized book summary, lemmatized book summary, and the sentiment score based on the NLTK SentimentIntensityAnalyzer. Additional stopwords were introduced to the stopwords process.
+    After tidying, the random books dataframe comprised 3686 rows and 19 columns. Columns created included whether the book appeared on the NYT Best Seller list ('bestseller' or 'unsuccessful') and columns to hold normalized title, normalized book summary, lemmatized book summary, and the sentiment score based on the NLTK SentimentIntensityAnalyzer. Additional stopwords were introduced to the stopwords process.
     
     Final columns : title, summary, year_published, author, review_count, number_of_ratings, length, genre, rating, reviews, cleaned_title, cleaned_summary, target, lemmatized_summary, neg, neutral, pos, compound, sentiment.
     </summary>
