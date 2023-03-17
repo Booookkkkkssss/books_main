@@ -1,7 +1,7 @@
 #  Identifying The Next Best Seller 
 ## A Natural Language Processing Analysis Of Books On Goodreads  
 
-### Data Scientist Project Team : Shawn Brown , Manuel Parra, Magdalena Rahn, Brandon Navarrete
+### Data Scientist Project Team: Shawn Brown, Manuel Parra, Magdalena Rahn, Brandon Navarrete
 
 <a href="#"><img alt="Python" src="https://img.shields.io/badge/Python-013243.svg?logo=python&logoColor=blue"></a>
 <a href="#"><img alt="Pandas" src="https://img.shields.io/badge/Pandas-150458.svg?logo=pandas&logoColor=red"></a>
@@ -45,7 +45,7 @@ Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, t
 
 ## :star2: Data Overview  
 
-* The data was obtained on 13 and 14 March 2023 using Python coding and the programming utilities BeautifulSoup and Selenium to programmatically acquire data from the public, third-party websites Goodreads, [Wikipedia](https://en.wikipedia.org/wiki/Lists_of_The_New_York_Times_fiction_best_sellers) and Amazon.    
+* The data was obtained on 13–15 March 2023 using Python coding and the programming utilities BeautifulSoup and Selenium to programmatically acquire data from the public, third-party websites Goodreads, [Wikipedia](https://en.wikipedia.org/wiki/Lists_of_The_New_York_Times_fiction_best_sellers) and Amazon.    
 
 * On GitHub, Maria Antoniak's and Melanie Walsh's [goodreads-scraper](https://github.com/uchidalab/book-dataset) was referenced as initial scaffolding, after which we built our own Python code.    
 
@@ -67,7 +67,7 @@ Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, t
 #### :one:   Data Acquisition
 
 <details open> <summary> Acquisition Utilities And Methods </summary>
-Data was acquired using Python programming and associated libraries and utilities : pandas, NumPy, os, re, time, json, urllib, XPath, BeautifulSoup and Selenium.  
+Data was acquired using Python programming and associated libraries and utilities: pandas, NumPy, os, re, time, json, urllib, XPath, BeautifulSoup and Selenium.  
 
 Issues encountered, and resolved, included locating accessible and reliable datasources, applying code across four different computing platforms, learning new data-accessing techniques and website obstacles.
 
@@ -89,7 +89,7 @@ Tidying included dropping any remaining null values, while deliberately in the c
     
 After tidying, the books dataframe comprised 3665 rows and 19 columns. Columns created included whether the book appeared on the NYT Best Seller list ('successful': True or False) and columns to hold normalized title, normalized book summary, lemmatized book summary, and the sentiment score based on the NLTK SentimentIntensityAnalyzer. Customized stopwords were introduced to the stopwords process.  
     
-Final columns : title, summary, year_published, author, review_count, number_of_ratings, length, genre, rating, reviews, cleaned_title, cleaned_summary, successful, lemmatized_summary, neg, neutral, pos, compound, sentiment.  
+Final columns: title, summary, year_published, author, review_count, number_of_ratings, length, genre, rating, reviews, cleaned_title, cleaned_summary, successful, lemmatized_summary, neg, neutral, pos, compound, sentiment.  
 </details>
 
         
@@ -120,7 +120,7 @@ Initial Questions
 * e. Does the length of a book have a relationship to its successs?   
     - The mean length of bestsellers was 477 pages, the median was 400 pages. The standard deviation was about 205 pages. So, 68% of NYT bestsellers had a length of 272 to 682 pages.  
     - Non-bestsellers had an average length of about 355 pages, with a standard deviation of about 175 pages. So, 68% of non-bestsellers had a length between 180 and 530 pages.  
-    - Using the CDF (cumulative density function) based on the low end of the non-bestseller standard deviation, it was found that there was a 7pc chance of a successful book having a length of 180 pages or less.  
+    - Using the CDF (cumulative density function) based on the low end of the non-bestseller standard deviation, it was found that there was a 7% chance of a successful book having a length of 180 pages or less.  
 * f. Of all authors, which ones had the most books published ?  J.D. Robb, Stephen King and Louise Penny were the most prolific.  
 * g. Which genres are most prevalent? Fiction, non-fiction, fantasy and romance titles topped the list.      
 * h. What is the relationship between the sumamry sentiment score and the book length? There was a weak negative correlation, as demonstrated by the Pearson's R test.  
@@ -141,7 +141,7 @@ Initial Questions
 <details>
 Models  
     
-**IDF:** It was decided to use the Decision Tree classification model on the dataset, with the goal of determining which features would lead to a book's success. In order to perform Decision Tree modeling, it was first necessary to obtain the TF-IDF for the words in the lemmatized book summaries (30. This included dropping words with very low IDF scores and very high IDF scores. The result kept about 24% of the original IDF word list: due to the public-imput nature of Goodreads, many of the official book summaries contained typos and words not encountered in any other context; these words were, accordingly, dropped.    
+**IDF:** It was decided to use the Decision Tree classification model on the dataset, with the goal of determining which features would lead to a book's success. In order to perform Decision Tree modeling, it was first necessary to obtain the TF-IDF for the words in the lemmatized book summaries. This included dropping words with very low IDF scores and very high IDF scores. The result kept about 24% of the original IDF word list: due to the public-imput nature of Goodreads, many of the official book summaries contained typos and words not encountered in any other context; these words were, accordingly, dropped.    
     
     
 **Decision Tree using the XGBoost classifier:**  After having obtained a useable dataframe of IDF word scores, the sklearn method Grid Search was used to probe which parameters would lead to successful models. The XGBoost Classifer, using cross-validation, was imput into Grid Search in order to create the multiple models.  
@@ -169,9 +169,9 @@ Initial models attempted included XBG regressor, random forest and XGBoost; thes
    
    
 <summary> Going Further </summary>
-Future iterations of this project would obtain the publishers of each book and multiple Goodreads user reviews for each book. This would be used for natural language processing (NLP) modeling on the text of the reviews. Feature engineering review sentiment scores would be another option.  
+* Future iterations of this project would obtain the publishers of each book and multiple Goodreads user reviews for each book. This would be used for natural language processing (NLP) modeling on the text of the reviews. Feature engineering review sentiment scores would be another option.  
     
-Information on publishers would, likewise, be used as a feature in determining what contributes to a book being a NYT Best Seller title.    
+* Information on publishers would, likewise, be used as a feature in determining what contributes to a book being a NYT Best Seller title.    
 
 </details>
 
@@ -180,11 +180,11 @@ Information on publishers would, likewise, be used as a feature in determining w
    
    
 <summary> Steps To Follow </summary>
-1. Assure the presence of a Jupyter Notebook or Jupyter Labs environment and that Python programming skills are available.   
-2. Use the .csv file in this repository and load the data into the Jupyter environment.
-3. Assure a working knowledge of XGBoost, pandas, NumPy, scikit-learn libraries, natural language processing, classification models and statistical tests.
-3. Using the code in this repository, copy the prepare.py, explore.py and model.py files and import them into the Jupyter workbook.
-4. Run the code in order : prepare, explore, model and use this repository, in particular Final_Notebook.ipynb, as a guide in shooting code errors.
+1. Assure the presence of a Jupyter Notebook or Jupyter Labs environment and that Python programming skills are available.     
+2. Use the .csv file in this repository and load the data into the Jupyter environment.  
+3. Assure a working knowledge of XGBoost, pandas, NumPy, scikit-learn libraries, natural language processing, classification models and statistical tests.  
+3. Using the code in this repository, copy the prepare.py, explore.py and model.py files and import them into the Jupyter workbook.  
+4. Run the code in order : prepare, explore, model and use this repository, in particular Final_Notebook.ipynb, as a guide in shooting code errors.  
 
 </details>
 
