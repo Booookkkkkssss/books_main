@@ -14,6 +14,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import recall_score, confusion_matrix, plot_confusion_matrix, f1_score, ConfusionMatrixDisplay
 
 import xgboost as xgb 
+from sklearn.metrics import roc_curve
+from sklearn.metrics import auc
 
 import prepare as pr 
 
@@ -182,6 +184,7 @@ def XGBclf(X_train_scaled, X_test_scaled, y_train, y_test):
 
 def roc(y_test, y_pred):
     
+    y_test = pd.DataFrame(y_test)
     
     mode_val = y_test['successful'].mode()[0]
 
