@@ -17,6 +17,32 @@ Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, t
 
 
 
+## Data Dictionary
+
+
+|Feature|              Definition|  
+| :------|:------|  
+|**title**|            title of the book |  
+|**summary**|          official Goodreads summary of the book |                                
+|**year_published**|   year of publication indicated on the main edition on Goodreads |  
+|**author**|           author of the book|  
+|**review_count**|     total number of user reviews on Goodreads|   
+|**number_of_ratings**|total number of user star ratings on Goodreads|  
+|**length**|           length, in pages, of book; if number of pages was missing, the number of pages in the earliest hardcover edition on Goodreads were used|  
+|**rating**|           actual star rating from users, with 0 being the lowest and 5 the highest|  
+|**reviews**|          text of users' publically available book reviews, when available, up to 10 per book|  
+|**cleaned_title**|    book title after normalizing, encoding, decoding and passing through a RegEx statement|  
+|**cleaned_summary**|  official Goodreads summary of the book after normalizing, encoding, decoding and passing through a RegEx statement|  
+|**target**|           engineered feature indicating whether the book appeared ('bestseller' or 'unsuccessful'), since 1931, on the New York Times Best Seller list|  
+|**lemmatized_summary**|lemmatized text of the official Goodreads summary of the book|  
+|**neg**|          negative leaning of the sentiment score, based on the official Goodreads summary of the book|  
+|**neutral**|     neutral position of the sentiment score, based on the official Goodreads summary of the book|  
+|**pos**|          positive leaning of the sentiment score, based on the official Goodreads summary of the book|  
+|**compound**|     composite of the negative, neutral and positive sentiment scores, obtained using the NLTK SentimentIntensityAnalyzer|  
+|**sentiment**|    word-based indication of the overall sentiment of the official Goodreads summary of the book|   
+
+
+
 ## :star2: Data Overview  
 
 * The data was obtained on 13 and 14 March 2023 using Python coding and the programming utilities BeautifulSoup and Selenium to programmatically acquire data from the public, third-party websites Goodreads, [Wikipedia](https://en.wikipedia.org/wiki/Lists_of_The_New_York_Times_fiction_best_sellers) and Amazon.    
@@ -40,7 +66,7 @@ Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, t
 ### :dizzy: Project Plan / Process
 #### :one:   Data Acquisition
 
-<details> <summary> Acquisition Utilities And Methods </summary>
+<details open> <summary> Acquisition Utilities And Methods </summary>
 Data was acquired using Python programming and associated libraries and utilities : pandas, NumPy, os, re, time, json, urllib, XPath, BeautifulSoup and Selenium.  
 
 Issues encountered, and resolved, included locating accessible and reliable datasources, applying code across four different computing platforms, learning new data-accessing techniques and website obstacles.
@@ -51,7 +77,7 @@ Issues encountered, and resolved, included locating accessible and reliable data
 
 #### :two:   Data Preparation
 
-<details>  
+<details open>  
     <summary>Preparation Summary </summary>
 Missing values for book titles were manually imputed, based on the corresponding row's book summary. In cases when the number of pages or year of publication were missing for a given book, the earliest-appearing hardcover book listed on Goodreads was used. Books in languages other than English were dropped, as were duplicates of a given title by the same author and books that only had an audiobook listing on Goodreads. Genres with less than 8 titles were dropped, as were picture books.  
 </details>
@@ -108,7 +134,7 @@ Initial Questions
  
 #### :four:   Modeling And Evaluation
 
-<details>
+<details open>
 <summary> TF-IDF, Decision Tree, XGB Classifier  </summary>
 </details>
   
@@ -138,34 +164,26 @@ Initial models attempted included XBG regressor, random forest and XGBoost; thes
 
 
 
-:electron: # Next Steps
+## :electron: Next Steps
+<details>
+   
+   
+<summary> Going Further </summary>
+Future iterations of this project would obtain the publishers of each book and multiple Goodreads user reviews for each book. This would be used for natural language processing (NLP) modeling on the text of the reviews. Feature engineering review sentiment scores would be another option.  
+    
+Information on publishers would, likewise, be used as a feature in determining what contributes to a book being a NYT Best Seller title.    
+
+</details>
+
+### To Reproduce:
+<details>
+   
+   
+<summary> Steps To Follow </summary>
+1. Assure the presence of a Jupyter Notebook or Jupyter Labs environment and that Python programming skills are available.  
+2. Using the code in this repository, copy the prepare.py, explore.py and model.py files and import them into the Jupyter workbook.
+3. Use the .csv file 
+
+</details>
 
 
-To Reproduce:
-
-
-
-
-## Data Dictionary
-
-
-|Feature|              Definition|  
-| :------|:------|  
-|**title**|            title of the book |  
-|**summary**|          official Goodreads summary of the book |                                
-|**year_published**|   year of publication indicated on the main edition on Goodreads |  
-|**author**|           author of the book|  
-|**review_count**|     total number of user reviews on Goodreads|   
-|**number_of_ratings**|total number of user star ratings on Goodreads|  
-|**length**|           length, in pages, of book; if number of pages was missing, the number of pages in the earliest hardcover edition on Goodreads were used|  
-|**rating**|           actual star rating from users, with 0 being the lowest and 5 the highest|  
-|**reviews**|          text of users' publically available book reviews, when available, up to 10 per book|  
-|**cleaned_title**|    book title after normalizing, encoding, decoding and passing through a RegEx statement|  
-|**cleaned_summary**|  official Goodreads summary of the book after normalizing, encoding, decoding and passing through a RegEx statement|  
-|**target**|           engineered feature indicating whether the book appeared ('bestseller' or 'unsuccessful'), since 1931, on the New York Times Best Seller list|  
-|**lemmatized_summary**|lemmatized text of the official Goodreads summary of the book|  
-|**neg**|          negative leaning of the sentiment score, based on the official Goodreads summary of the book|  
-|**neutral**|     neutral position of the sentiment score, based on the official Goodreads summary of the book|  
-|**pos**|          positive leaning of the sentiment score, based on the official Goodreads summary of the book|  
-|**compound**|     composite of the negative, neutral and positive sentiment scores, obtained using the NLTK SentimentIntensityAnalyzer|  
-|**sentiment**|    word-based indication of the overall sentiment of the official Goodreads summary of the book|   
