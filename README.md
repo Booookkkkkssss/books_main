@@ -150,7 +150,7 @@ Initial models attempted included XBG regressor, random forest and XGBoost; thes
 
     
 **Evaluation**    
-Using recall as the target metric with the XGBoost Classifier on the scaled train dataset, the model correctly identified 11 bestsellers known to be bestsellers and 693 non-bestsellers predicted as non-bestsellers. Of all the titles, 21 bestsellers were predicted as non-bestsellers. This produced a recall (false-positives) score of about 34%. Out of all the non-bestsellers, however, only 8 were incorrectly predicted to be bestsellers. This led to an accuracy score of 96%.
+Using recall as the target metric with the XGBoost Classifier on the scaled test dataset, the model correctly identified 11 bestsellers known to be bestsellers and 693 non-bestsellers predicted as non-bestsellers. Of all the titles, 21 bestsellers were predicted as non-bestsellers. This produced a recall (false-positives) score of about 34%. Out of all the non-bestsellers, however, only 8 were incorrectly predicted to be bestsellers. This led to an accuracy score of 96%.
   
 </details>
 
