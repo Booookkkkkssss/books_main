@@ -114,7 +114,7 @@ Initial Questions
 * c. The max rating for bestseller books is 4.76, while the average rating for bestsellers was 4.10. In unsuccessful books, the average score was 4.00, but the max rating was 4.8.    
 * d. What was the distribution of summary sentiment scores based on review count?    
     - For bestsellers, books with a very positive sentiment score had the highest number of reviews, followed by books with a positive sentiment score.  
-    - For non-bestsellers, books with a negative summary-sentiment score had the highest number of reviews, followed by books with a very negative or a very positive sentiment score.  
+    - For non-bestsellers, books with a negative summary sentiment score had the highest number of reviews, followed by books with a very negative or a very positive sentiment score.  
     - For the overall train dataset, books with a negative summary-sentiment score had the highest number of reviews, followed by books with a positive sentiment score.  
     - Of the bestseller sentiment scores in the train dataset, 65 had very negative scores, 7 had negative, 1 had neutral, 11 had positive and 43 had very positive.      
 * e. Does the length of a book have a relationship to its successs?   
@@ -147,8 +147,9 @@ Models
 **Decision Tree using the XGBoost classifier:**  After having obtained a useable dataframe of IDF word scores, the sklearn method Grid Search was used to probe which parameters would lead to successful models. The XGBoost Classifer, using cross-validation, was imput into Grid Search in order to create the multiple models.    
     
 Initial models attempted included XBG regressor, random forest and XGBoost; these returned extremely low recall scores and were deemed unsuitable, leading to the use of the XGBoost classifier. However, due to time constraints and the hours needed in running the XGBoost Classifier on features including the book summary IDF word score, it was deemed wiser to put the inclusion of the IDF word score on hold. Instead, the XGBoost was used on the categorical features excluding the IDF. Before running, dummies for sentiment and genre were made on the original dataframe, the data was split into train and test, the train data was split into X_train and y_train, and then scaled.  
+
     
-  
+**Evaluation**    
 Using recall as the target metric with the XGBoost Classifier on the scaled train dataset, the model correctly identified 11 bestsellers known to be bestsellers and 693 non-bestsellers predicted as non-bestsellers. Of all the titles, 21 bestsellers were predicted as non-bestsellers. This produced a recall (false-positives) score of about 34%. Out of all the non-bestsellers, however, only 8 were incorrectly predicted to be bestsellers. This led to an accuracy score of 96%.
   
 </details>
@@ -159,9 +160,8 @@ Using recall as the target metric with the XGBoost Classifier on the scaled trai
    
    
 <summary> Key Points </summary>
- 
-    
-* NYT Best Seller books had, on average, a longer page length than non-bestsellers.   
+   
+* NYT Best Seller books had, on average, a longer page count than non-bestsellers.   
 * The negativity or the positivity of the book summary sentiment score had little-to-no relationship to the number of ratings a book received.   
 * J.D. Robb and Stephen King were top-performing authors from both the random assortment of books and on the New York Times Best Seller list.  
 
