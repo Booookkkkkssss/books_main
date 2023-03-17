@@ -144,9 +144,13 @@ Models
 **IDF:** It was decided to use the Decision Tree classification model on the dataset, with the goal of determining which features would lead to a book's success. In order to perform Decision Tree modeling, it was first necessary to obtain the TF-IDF for the words in the lemmatized book summaries. This included dropping words with very low IDF scores and very high IDF scores. The result kept about 24% of the original IDF word list: due to the public-imput nature of Goodreads, many of the official book summaries contained typos and words not encountered in any other context; these words were, accordingly, dropped.    
     
     
-**Decision Tree using the XGBoost classifier:**  After having obtained a useable dataframe of IDF word scores, the sklearn method Grid Search was used to probe which parameters would lead to successful models. The XGBoost Classifer, using cross-validation, was imput into Grid Search in order to create the multiple models.  
+**Decision Tree using the XGBoost classifier:**  After having obtained a useable dataframe of IDF word scores, the sklearn method Grid Search was used to probe which parameters would lead to successful models. The XGBoost Classifer, using cross-validation, was imput into Grid Search in order to create the multiple models.    
     
-Initial models attempted included XBG regressor, random forest and XGBoost; these returned extremely low recall scores and were deemed unsuitable, leading to the use of the XGBoost classifier.
+Initial models attempted included XBG regressor, random forest and XGBoost; these returned extremely low recall scores and were deemed unsuitable, leading to the use of the XGBoost classifier. However, due to time constraints and the hours needed in running the XGBoost Classifier on features including the book summary IDF word score, it was deemed wiser to put the inclusion of the IDF word score on hold. Instead, the XGBoost was used on the categorical features excluding the IDF. Before running, dummies for sentiment and genre were made on the original dataframe, the data was split into train and test, the train data was split into X_train and y_train, and then scaled.  
+    
+  
+Using recall as the target metric with the XGBoost Classifier on the scaled train dataset, the model correctly identified 16 bestsellers known to be bestsellers and 673 non-bestsellers predicted as non-bestsellers. Of all the titles, 16 bestsellers were predicted as non-bestsellers. This produced a recall (false-positives) score of about 50%. The accuracy score, however, 
+  
 </details>
 
 
@@ -173,6 +177,8 @@ Initial models attempted included XBG regressor, random forest and XGBoost; thes
 * Future iterations of this project would obtain the publishers of each book and multiple Goodreads user reviews for each book. This would be used for natural language processing (NLP) modeling on the text of the reviews. Feature engineering review sentiment scores would be another option.  
     
 * Information on publishers would, likewise, be used as a feature in determining what contributes to a book being a NYT Best Seller title.    
+    
+* Add the words 'new', 'york', 'times', 'author', 'bestseller', 'alternate', 'cover', 'bestselling', 'edition' for future stopwords when exploring book summaries.
 
 </details>
 
@@ -183,7 +189,7 @@ Initial models attempted included XBG regressor, random forest and XGBoost; thes
 2. Use the .csv file in this repository and load the data into the Jupyter environment.  
 3. Assure a working knowledge of XGBoost, pandas, NumPy, scikit-learn libraries, natural language processing, classification models and statistical tests.  
 3. Using the code in this repository, copy the prepare.py, explore.py and model.py files and import them into the Jupyter workbook.  
-4. Run the code in order : prepare, explore, model and use this repository, in particular Final_Notebook.ipynb, as a guide in shooting code errors.  
+4. Run the code in order: prepare, explore, model and use this repository, in particular Final_Notebook.ipynb, as a guide in shooting code errors.  
 
 </details>
 
