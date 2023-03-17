@@ -168,8 +168,7 @@ Initial models attempted included XBG regressor, random forest and XGBoost; thes
 <details>
    
    
-<summary> Going Further </summary>
-Ideas  
+<summary> Going Further </summary>  
     
 * Future iterations of this project would obtain the publishers of each book and multiple Goodreads user reviews for each book. This would be used for natural language processing (NLP) modeling on the text of the reviews. Feature engineering review sentiment scores would be another option.  
     
