@@ -69,14 +69,14 @@ Final columns : title, summary, year_published, author, review_count, number_of_
         
 #### :three:   Exploratory Analysis
 
-<details>
+<details open>
 <summary> Initial And Further Questions
     </summary>
 Questions initially identified during project discussion sessions were refined during exploration. Some of the inital questions were answered, while others, which demanded asking after increased familiarity with the data, were explored and responded to.    
 </details>
 
 <details>
-**Initial Questions**  
+Initial Questions  
 
 * Question 1: Looking at bigrams, best-selling author names appeared often, as did character names from series (possibly due to it being a small sample in the data set or people being drawn to series due to emotional connection to characters) and place names.  
     
@@ -113,7 +113,8 @@ Questions initially identified during project discussion sessions were refined d
 </details>
   
 <details>
-**Models**  
+Models  
+    
 **IDF:** It was decided to use the Decision Tree classification model on the dataset, with the goal of determining which features would lead to a book's success. In order to perform Decision Tree modeling, it was first necessary to obtain the TF-IDF for the words in the lemmatized book summaries (30. This included dropping words with very low IDF scores and very high IDF scores. The result kept about 24% of the original IDF word list: due to the public-imput nature of Goodreads, many of the official book summaries contained typos and words not encountered in any other context; these words were, accordingly, dropped.    
     
     
