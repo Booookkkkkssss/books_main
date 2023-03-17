@@ -110,7 +110,7 @@ Initial Questions
       
 **Further Questions:**  
 * a. How many are books successful and not successful? 0.48% were found to be successful in our dataset.     
-* b. Which authors are having the most success? J.D. Robb, Stephen King and Rick Riordan topped the list.      
+* b. Which authors had had the most NYT success? J.D. Robb, Stephen King and Rick Riordan topped the list.      
 * c. The max rating for bestseller books is 4.76, while the average rating for bestsellers was 4.10. In unsuccessful books, the average score was 4.00, but the max rating was 4.8.    
 * d. What was the distribution of summary sentiment scores based on review count?    
     - For bestsellers, books with a very positive sentiment score had the highest number of reviews, followed by books with a positive sentiment score.  
@@ -149,7 +149,7 @@ Models
 Initial models attempted included XBG regressor, random forest and XGBoost; these returned extremely low recall scores and were deemed unsuitable, leading to the use of the XGBoost classifier. However, due to time constraints and the hours needed in running the XGBoost Classifier on features including the book summary IDF word score, it was deemed wiser to put the inclusion of the IDF word score on hold. Instead, the XGBoost was used on the categorical features excluding the IDF. Before running, dummies for sentiment and genre were made on the original dataframe, the data was split into train and test, the train data was split into X_train and y_train, and then scaled.  
     
   
-Using recall as the target metric with the XGBoost Classifier on the scaled train dataset, the model correctly identified 16 bestsellers known to be bestsellers and 673 non-bestsellers predicted as non-bestsellers. Of all the titles, 16 bestsellers were predicted as non-bestsellers. This produced a recall (false-positives) score of about 50%. The accuracy score, however, 
+Using recall as the target metric with the XGBoost Classifier on the scaled train dataset, the model correctly identified 11 bestsellers known to be bestsellers and 693 non-bestsellers predicted as non-bestsellers. Of all the titles, 21 bestsellers were predicted as non-bestsellers. This produced a recall (false-positives) score of about 34%. Out of all the non-bestsellers, however, only 8 were incorrectly predicted to be bestsellers. This led to an accuracy score of 96%.
   
 </details>
 
@@ -159,12 +159,18 @@ Using recall as the target metric with the XGBoost Classifier on the scaled trai
    
    
 <summary> Key Points </summary>
-   
+Notably...  
+* NYT Best Seller books had, on average, a longer page length than non-bestsellers.  
+* The negativity or the positivity of the book summary sentiment score had little-to-no relationship to the number of ratings a book received.  
+* J.D. Robb and Stephen King were top-performing authors from both the random assortment of books and on the New York Times Best Seller list.
 
 </details>
 
 
-# Recommendation
+# Recommendations
+Pay attention to the style of books written by authors whose books frequently appear on the New York Times Best Seller list.  
+
+As a publisher, make effort to get as many Goodreads ratings as possible, as the higher the number of reader ratings on Goodreads, the higher the overall star rating score and the more likely the book was to be on the New York Times Best Seller list.  
 
 
 
