@@ -180,9 +180,11 @@ Information on publishers would, likewise, be used as a feature in determining w
    
    
 <summary> Steps To Follow </summary>
-1. Assure the presence of a Jupyter Notebook or Jupyter Labs environment and that Python programming skills are available.  
-2. Using the code in this repository, copy the prepare.py, explore.py and model.py files and import them into the Jupyter workbook.
-3. Use the .csv file 
+1. Assure the presence of a Jupyter Notebook or Jupyter Labs environment and that Python programming skills are available.   
+2. Use the .csv file in this repository and load the data into the Jupyter environment.
+3. Assure a working knowledge of XGBoost, pandas, NumPy, scikit-learn libraries, natural language processing, classification models and statistical tests.
+3. Using the code in this repository, copy the prepare.py, explore.py and model.py files and import them into the Jupyter workbook.
+4. Run the code in order : prepare, explore, model and use this repository, in particular Final_Notebook.ipynb, as a guide in shooting code errors.
 
 </details>
 
