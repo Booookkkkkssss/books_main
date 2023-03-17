@@ -77,6 +77,7 @@ Questions initially identified during project discussion sessions were refined d
 
 <details>
 **Initial Questions**  
+
 * Question 1: Looking at bigrams, best-selling author names appeared often, as did character names from series (possibly due to it being a small sample in the data set or people being drawn to series due to emotional connection to characters) and place names.  
     
 * Question 4: Which combination of features led a higher chance of appearing on the NYT Best Seller list ? The greater the number of reviews and the greater the number star ratings correspond to a higher overall rating.  A slight correlation was found between  having a higher negative summary sentiment score and being a bestseller.   
@@ -112,8 +113,9 @@ Questions initially identified during project discussion sessions were refined d
 </details>
   
 <details>
-**Models**
+**Models**  
 **IDF:** It was decided to use the Decision Tree classification model on the dataset, with the goal of determining which features would lead to a book's success. In order to perform Decision Tree modeling, it was first necessary to obtain the TF-IDF for the words in the lemmatized book summaries (30. This included dropping words with very low IDF scores and very high IDF scores. The result kept about 24% of the original IDF word list: due to the public-imput nature of Goodreads, many of the official book summaries contained typos and words not encountered in any other context; these words were, accordingly, dropped.    
+    
     
 **Decision Tree using the XGBoost classifier:**  After having obtained a useable dataframe of IDF word scores, the sklearn method Grid Search was used to probe which parameters would lead to successful models. The XGBoost Classifer, using cross-validation, was imput into Grid Search in order to create the multiple models.  
     
