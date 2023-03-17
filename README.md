@@ -159,10 +159,11 @@ Using recall as the target metric with the XGBoost Classifier on the scaled trai
    
    
 <summary> Key Points </summary>
-Notably...  
-* NYT Best Seller books had, on average, a longer page length than non-bestsellers.  
-* The negativity or the positivity of the book summary sentiment score had little-to-no relationship to the number of ratings a book received.  
-* J.D. Robb and Stephen King were top-performing authors from both the random assortment of books and on the New York Times Best Seller list.
+ 
+    
+* NYT Best Seller books had, on average, a longer page length than non-bestsellers.   
+* The negativity or the positivity of the book summary sentiment score had little-to-no relationship to the number of ratings a book received.   
+* J.D. Robb and Stephen King were top-performing authors from both the random assortment of books and on the New York Times Best Seller list.  
 
 </details>
 
