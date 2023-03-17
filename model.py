@@ -13,10 +13,11 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import recall_score, confusion_matrix, plot_confusion_matrix, f1_score, ConfusionMatrixDisplay
 
-from xgboost import XGBClassifier
+import xgboost as xgb 
 
 import prepare as pr 
 
+seed = 42
 #--------------------------------------------------------
 
 def ready_df(df):
@@ -41,26 +42,19 @@ def ready_df(df):
     
     return df
 
-
-#--------------------------------------------------------
-
-
-
-
-
 #--------------------------------------------------------
 
 def Xy_set(train,test):
     
-     '''
+    
+    '''
     Input: A train and test dataframe.
     Output: X_train, y_train, X_test, y_test dataframe, where the X are features that we are modeling and y is the target feature.
     
-    This function creates dataframes where the x and y are split into train and test for modeling. It will return x_train, y_train, x_test, y_test where the index is reset and NOT reordered.
-    
+    This function creates dataframes where the x and y are split into train and test for modeling. It will return x_train, y_train, x_test y_test where the index is reset and NOT reordered.
     '''
     # creating train and test (x and y) subsets
-    X_train =  train.drop(columns= "successful")
+    X_train = train.drop(columns= "successful")
     y_train = train['successful']
     
     # creating train and test (x and y) subsets
@@ -104,8 +98,8 @@ def scaling(X_train, X_test):
     X_test_scaled = scaler.transform(X_test[number_list])
     
     # create a dataframe
-    X_train_scaled = pd.DataFrame(X_train_scaled, columns= [number_ls])
-    X_test_scaled = pd.DataFrame(X_test_scaled, columns= [number_ls])
+    X_train_scaled = pd.DataFrame(X_train_scaled, columns= [number_list])
+    X_test_scaled = pd.DataFrame(X_test_scaled, columns= [number_list])
     
     
     # add the 'neg','neutral','pos','compound' from x_train to the scaled data. reset
@@ -123,7 +117,7 @@ def scaling(X_train, X_test):
 
 #--------------------------------------------------------
 
-def XGBclf(X_train_scaled, X_test_scaled): 
+def XGBclf(X_train_scaled, X_test_scaled, y_train, y_test): 
     
     ''' 
     Input: X_train_scaled, X_test_scaled dataframe.

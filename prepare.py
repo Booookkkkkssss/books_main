@@ -13,6 +13,8 @@ from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
+seed = 42
+
 #---------------------------------------------
 
 def prep_data(filename):

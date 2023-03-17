@@ -15,10 +15,12 @@ from scipy import stats
 from scipy.stats import norm, binom, pearsonr
 from collections import Counter
 
+seed = 42
+
 #-------------------------------------------------------
 
 def split(df, target):
-    train, test = train_test_split(df, test_size=.2, random_state=42, stratify=df[target])
+    train, test = train_test_split(df, test_size=.2, random_state=seed, stratify=df[target])
     return train, test
 
 #-------------------------------------------------------
