@@ -11,7 +11,7 @@ from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
-import scipy.stats as stats
+from scipy import stats
 from scipy.stats import norm, binom, pearsonr
 from collections import Counter
 
@@ -128,7 +128,12 @@ def uni_id_best_seller(train):
      [['p_unsuccessful', 'p_best']]
      .tail(10)
      .sort_values('p_best')
-     .plot.barh(stacked=True))
+     .plot.barh(stacked=True),
+           
+     plt.title('Common Words in Positively Aligned Summaries'),
+     plt.xlabel('Probability of Appearing'),
+     plt.ylabel('Word'),
+     plt.legend(title='Successful', loc = 'upper right', labels=['No', 'Yes']))
 
      )
     
@@ -157,8 +162,9 @@ def best_bigrams(best):
     plt.ylabel('Bigram')
     plt.xlabel('# Occurrences')
     plt.yticks(range(len(labels)), [' '.join(label) for label in labels])
+    plt.savefig('pink_bigrams', dpi=500)
     plt.show()
-
+    
 #-------------------------------------------------------
 
 def jointplot_viz(train):
@@ -247,11 +253,31 @@ def book_len_success(train):
 
 #-------------------------------------------------------
 
+def pearsonr_report(group1, group2):
+    '''
+    This function takes in two groups (columns), and will perform a pearsonr test on them and print out 
+    the test statistic and p-value, as well as determine if the p-value is lower than a predetermined (.05) alpha
+    '''
+    corr, p = stats.pearsonr(group1, group2)
 
+    alpha = .05
+    seed = 42
+
+    print(f'Correlation = {corr:.4f}') 
+    print(f'p-value     = {p}')
+
+    print('Is p-value < alpha?', p < alpha)
 
 #-------------------------------------------------------
 
+def sent_vs_len(train):
 
+    sns.scatterplot(data=train, x='length', y='compound', hue='successful')
+
+    plt.title('Comparing Book Length to the Compound Sentiment Score')
+    plt.xlabel('Book Length')
+    plt.ylabel('Sentiment Score')
+    plt.show()
 
 #-------------------------------------------------------
 
