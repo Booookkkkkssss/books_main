@@ -169,6 +169,8 @@ Initial models attempted included XBG regressor, random forest and XGBoost; thes
    
    
 <summary> Going Further </summary>
+Ideas  
+    
 * Future iterations of this project would obtain the publishers of each book and multiple Goodreads user reviews for each book. This would be used for natural language processing (NLP) modeling on the text of the reviews. Feature engineering review sentiment scores would be another option.  
     
 * Information on publishers would, likewise, be used as a feature in determining what contributes to a book being a NYT Best Seller title.    
@@ -177,10 +179,8 @@ Initial models attempted included XBG regressor, random forest and XGBoost; thes
 
 ### To Reproduce:
 <details>
-   
-   
-<summary> Steps To Follow </summary>
-1. Assure the presence of a Jupyter Notebook or Jupyter Labs environment and that Python programming skills are available.     
+  
+1. Assure the presence of a Jupyter Notebook or a JupyterLab environment and that Python programming skills are available.     
 2. Use the .csv file in this repository and load the data into the Jupyter environment.  
 3. Assure a working knowledge of XGBoost, pandas, NumPy, scikit-learn libraries, natural language processing, classification models and statistical tests.  
 3. Using the code in this repository, copy the prepare.py, explore.py and model.py files and import them into the Jupyter workbook.  
