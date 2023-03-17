@@ -180,6 +180,32 @@ def XGBclf(X_train_scaled, X_test_scaled, y_train, y_test):
 
 #--------------------------------------------------------
 
+def roc(y_test, y_pred):
+    
+    
+    mode_val = y_test['successful'].mode()[0]
+
+    # Create a new column with the mode value
+    y_test = y_test.assign(baseline=mode_val)
+    
+    
+    plt.figure(figsize=(10,6))
+
+
+    fpr, tpr, thresholds = roc_curve(y_test['successful'], y_pred)
+    plt.plot(fpr, tpr, color='blue', lw=2, label=f'XGBClassifer (area = %0.4f)' % auc(fpr, tpr))
+
+    fpr, tpr, thresholds = roc_curve(y_test['successful'], y_test['baseline'])
+    plt.plot(fpr, tpr, color='red', lw=2, label=f'Baseline (area = %0.4f)' % auc(fpr, tpr))
+
+
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.0])
+    plt.xlabel('False Positive Rate', fontsize=13)
+    plt.ylabel('True Positive Rate', fontsize=14)
+    plt.title('XGB Classifier Captured Area', fontsize=17)
+    plt.legend(loc='lower right', fontsize=13)
+    plt.show()
 
 
 #--------------------------------------------------------
