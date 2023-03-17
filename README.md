@@ -83,13 +83,12 @@ Final columns : title, summary, year_published, author, review_count, number_of_
     </summary>
 
 <details>
-Question 1: Looking at bigrams, best-selling author maybe list influcence, char names from series (small sample in data set or are people drawn to series, through emotional connection to characters), place names.  
-    
+Question 1: Looking at bigrams, best-selling author names appeared often, as did character names from series (possibly due to it being a small sample in the data set or people being drawn to series due to emotional connection to characters) and place names.  
 Question 4: Which combination of features led a higher chance of appearing on the NYT Best Seller list ? The greater the number of reviews and the greater the number star ratings correspond to a higher overall rating.  A slight correlation was found between  having a higher negative summary sentiment score and being a bestseller.
     
 Other questions:  
     a / How many are books successful and not successful? 0.48% were found to be successful in our dataset.  
-    b / Which authors are having the most success? J.D. Rbbb, Stephen King and Rick Riordan topped the list.  
+    b / Which authors are having the most success? J.D. Robb, Stephen King and Rick Riordan topped the list.  
     c / The max rating for bestseller books is 4.76, while the average rating for bestsellers was 4.10. In unsuccessful books, the average score was 4.00, but the max rating was 4.8.
     
     c / What was the distribution of summary sentiment scores based on review count?    
@@ -98,15 +97,25 @@ Other questions:
         For the overall train dataset, books with a negative summary-sentiment score had the highest number of reviews, followed by books with a positive sentiment score.  
         Of the bestseller sentiment scores in the train dataset, 65 had very negative scores, 7 had negative, 1 had neutral, 11 had positive and 43 had very positive.  
     
-    d / What is the mean length and standard deviation for bestsellers and non-bestsellers?   
+    d / Does the length of a book have a relationship to its successs?   
         The mean length of bestsellers was 477 pages, the median was 400 pages. The standard deviation was about 205 pages. So, 68% of NYT bestsellers had a length of 272 to 682 pages.  
         Non-bestsellers had an average length of about 355 pages, with a standard deviation of about 175 pages. So, 68% of non-bestsellers had a length between 180 and 530 pages.  
         Using the CDF (cumulative density function) based on the low end of the non-bestseller standard deviation, it was found that there was a 7pc chance of a successful book having a length of 180 pages or less.  
+        
     
     f / Of all authors, which ones had the most books published ?  
         J.D. Robb, Stephen King and Louise Penny were the most prolific.  
     
     g / Which genres are most prevalent? Fiction, non-fiction, fantasy and romance titles topped the list.  
+    
+    h / What is the relationship between the sumamry sentiment score and the book length?  
+        There was a weak negative correlation, as demonstrated by the Pearson's R test.
+    
+    i / Is there a relationship between length and year published?   
+        Data was plotted and Chi-square test were run on bestsellers, non-bestsellers and on the full train dataset.  
+        On the train dataset, there was a strong positive correlation between length and year published.   
+        For bestsellers, the null hypothesis (there is no relationship between lenght and year published) could NOT be rejected.  
+        Non-bestsellers showed a strong positive correlation between length and year published.  
 
     
     
