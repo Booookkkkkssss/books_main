@@ -1,8 +1,18 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 from sklearn.model_selection import train_test_split
 import sklearn.model_selection
 
+import nltk
+from nltk.tokenize.toktok import ToktokTokenizer
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+import scipy.stats as stats
+from scipy.stats import norm, binom, pearsonr
 from collections import Counter
 
 #-------------------------------------------------------
@@ -83,20 +93,21 @@ def explore_question_2_visuals(df):
 
 #-------------------------------------------------------
 
-def explore_question_2():
+def explore_question_2(train):
     top_15_negative_words_df = get_most_common_negative_ngrams(train,1,15)
     top_15_negative_bigrams_df = get_most_common_negative_ngrams(train,2,15)
     top_15_negative_trigrams_df = get_most_common_negative_ngrams(train,3,15)
     
-    question_2_visuals(top_15_negative_words_df)
-    question_2_visuals(top_15_negative_bigrams_df)
-    question_2_visuals(top_15_negative_trigrams_df)
+    explore_question_2_visuals(top_15_negative_words_df)
+    explore_question_2_visuals(top_15_negative_bigrams_df)
+    explore_question_2_visuals(top_15_negative_trigrams_df)
 
 #-------------------------------------------------------
 
 def uni_id_best_seller(train):
 
     best = train[train['successful'] == True] 
+    unsuccessful = train[train['successful'] == False] 
 
     best_words = pd.Series(' '.join(best.lemmatized_summary).split(' ')).value_counts()
     unsuccessful_words = pd.Series(' '.join(unsuccessful.lemmatized_summary).split(' ')).value_counts()
@@ -147,6 +158,96 @@ def best_bigrams(best):
     plt.xlabel('# Occurrences')
     plt.yticks(range(len(labels)), [' '.join(label) for label in labels])
     plt.show()
+
+#-------------------------------------------------------
+
+def jointplot_viz(train):
+    for col in nums.columns:
+        if col == 'number_of_ratings' or col == 'review_count' or col == 'rating':
+            for col1 in nums.columns:
+                if col1 == 'number_of_ratings' or col1 == 'review_count'or col == 'rating':
+                    plt.figure() # create a new figure for each plot
+                    sns.jointplot(data=nums, x=col, y= col1, hue= 'target')
+                    plt.title(f"Scatterplot of {col} vs. {col1}")
+                    plt.show()
+
+#-------------------------------------------------------
+
+def pearsonr_test(train):
+    
+    nums = train.select_dtypes(exclude = ['string','object'] )
+    
+    for col in nums.columns:
+        if col != 'target':
+            for col1 in nums.columns:
+                if col1 != 'target':
+                    print(f"pearsonr of {col} vs. {col1}")
+            
+                    s,p = stats.pearsonr(nums[f'{col}'], nums[f'{col1}'])
+                    print(f' stat = {s}, p-value = {p}')
+                    print('\n') 
+
+#-------------------------------------------------------
+
+# chi-square function
+
+def chi_sq(a, b):
+    '''
+    This function will take in two arguments in the form of two discrete variables 
+    and runs a chi^2 test to determine if the the two variables are independent of 
+    each other and prints the results based on the findings.
+    '''
+    alpha = 0.05
+    
+    result = pd.crosstab(a, b)
+
+    chi2, p, degf, expected = stats.chi2_contingency(result)
+
+    print(f'Chi-square  : {chi2:.4f}') 
+    print("")
+    print(f'P-value : {p:.4f}')
+    print("")
+    if p / 2 > alpha:
+        print("We fail to reject the null hypothesis.")
+    else:
+        print(f'We reject the null hypothesis ; there is a relationship between the target variable and the feature examined.')
+
+#-------------------------------------------------------
+
+# plotting all books : success vs page length
+
+def book_len_success(train):
+    
+    '''
+    this function uses the training dataset to plot 
+    the target ('successful') against the length in 
+    pages of each book. it puts out a barplot.
+    '''
+    plt.figure(figsize=(8, 5))
+
+    plt.title('Success Of Book Based On Average Page Length')
+
+    graphed = sns.barplot(x = train['successful'], y = train['length'], palette = 'CMRmap')
+
+    # set xtick labels and properties
+    plt.xticks([0, 1], 
+               [ 'Not On List', 'Bestseller'],
+               rotation = 25)
+
+    # plt.legend([],[]) --this line unnecessary here
+    plt.yticks(np.arange(0, 600, 100))
+
+    # display y axis grids
+    # graphed.yaxis.grid(True)
+
+    plt.ylabel('Count')
+    plt.xlabel('Appearance On NYT Best Seller List')
+
+    plt.show()
+
+#-------------------------------------------------------
+
+
 
 #-------------------------------------------------------
 

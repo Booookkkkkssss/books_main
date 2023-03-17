@@ -68,10 +68,6 @@ def get_data(file):
     df = df.reset_index()
     df = df.drop(columns=['index', 'book_tag'])
     
-    df['summary'] = df['summary'].astype('string')
-    df['title'] = df['title'].astype('string')
-    df['author'] = df['author'].astype('string')
-    df['genre'] = df['genre'].astype('string')
     df['length'] = df['length'].astype('float')
                                                
     return df
