@@ -57,7 +57,7 @@ Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, t
 #### :one:   Data Acquisition
 
 <details open> <summary> Acquisition Utilities And Methods </summary>
-Data was acquired using `Python` programming and associated libraries and utilities: `Pandas`, `NumPy`, `os`, `re`, `time`, `json`, `urllib`, `XPath`, `BeautifulSoup` and `Selenium`.  
+Data was acquired using `Python` programming and associated libraries and utilities: Pandas, NumPy, os, re, time, json, urllib, XPath, BeautifulSoup and Selenium.  
 
 Issues encountered, and resolved, included locating accessible and reliable datasources, applying code across four different computing platforms, learning new data-accessing techniques and website obstacles.
 
@@ -85,10 +85,13 @@ Final columns: `title`, `summary`, `year_published`, `author`, `review_count`, `
 <details open>
 <summary> Initial And Further Questions
     </summary>
+    
 Questions initially identified during project discussion sessions were refined during exploration. Some of the inital questions were answered, while others, which demanded asking after increased familiarity with the data, were explored and responded to.    
+    
 </details>
 
 <details>
+    
 **Initial Questions**
 
 * Question 1: Looking at bigrams, best-selling author names appeared often, as did character names from series (possibly due to it being a small sample in the data set or people being drawn to series due to emotional connection to characters) and place names.  
