@@ -87,7 +87,6 @@ Final columns: `title`, `summary`, `year_published`, `author`, `review_count`, `
     </summary>
     
 Questions initially identified during project discussion sessions were refined during exploration. Some of the inital questions were answered, while others, which demanded asking after increased familiarity with the data, were explored and responded to.    
-    
 </details>
 
 <details>
@@ -129,7 +128,7 @@ Questions initially identified during project discussion sessions were refined d
 <summary> `TF-IDF`, `Decision Tree`, `XGB Classifier`  </summary>
 </details>
   
-<summary> Models </summary>
+<details>
     
 **Models**  
     
@@ -150,7 +149,6 @@ Using recall as the target metric with the XGBoost Classifier on the scaled test
       
 <summary> Key Points </summary>
    
-    
 * NYT Best Seller books had, on average, a longer page count than non-bestsellers.   
 * The negativity or the positivity of the book summary sentiment score had little-to-no relationship to the number of ratings a book received.   
 * J.D. Robb and Stephen King were top-performing authors from both the random assortment of books and on the New York Times Best Seller list.  
@@ -178,7 +176,6 @@ As a publisher, make effort to get as many Goodreads ratings as possible, as the
 </details>
 
 ### To Reproduce:
-
 
 <details>
   
