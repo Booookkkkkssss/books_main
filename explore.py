@@ -15,6 +15,8 @@ from scipy import stats
 from scipy.stats import norm, binom, pearsonr
 from collections import Counter
 
+sns.set_style("darkgrid", {"grid.color": ".6", "grid.linestyle": ":"})
+
 seed = 42
 
 #-------------------------------------------------------
@@ -84,10 +86,10 @@ def get_most_common_negative_ngrams(train, n, top_n):
 #-------------------------------------------------------
 
 def explore_question_2_visuals(df):
+    
     # create the horizontal count plot
     plt.figure(figsize=(10, 6))
-    sns.set_style("whitegrid")
-    sns.barplot(x=df.columns[1], y=df.columns[0], data=df.head(15), color="skyblue")
+    sns.barplot(x=df.columns[1], y=df.columns[0], data=df.head(15), palette="deep")
     plt.title(f'Frequency of {df.columns[0]}')
     plt.xlabel(df.columns[1])
     plt.ylabel(df.columns[0])
@@ -96,14 +98,17 @@ def explore_question_2_visuals(df):
 #-------------------------------------------------------
 
 def explore_question_2(train):
+    
     top_15_negative_words_df = get_most_common_negative_ngrams(train,1,15)
     top_15_negative_bigrams_df = get_most_common_negative_ngrams(train,2,15)
     top_15_negative_trigrams_df = get_most_common_negative_ngrams(train,3,15)
     
     explore_question_2_visuals(top_15_negative_words_df)
+    
     explore_question_2_visuals(top_15_negative_bigrams_df)
+    
     explore_question_2_visuals(top_15_negative_trigrams_df)
-
+    
 #-------------------------------------------------------
 
 def uni_id_best_seller(train):
@@ -135,7 +140,7 @@ def uni_id_best_seller(train):
      plt.title('Common Words in Positively Aligned Summaries'),
      plt.xlabel('Probability of Appearing'),
      plt.ylabel('Word'),
-     plt.legend(title='Successful', loc = 'upper right', labels=['No', 'Yes']))
+     plt.legend(title='Successful Book', loc = 'upper right', labels=['No', 'Yes']))
 
      )
     
@@ -159,10 +164,10 @@ def best_bigrams(best):
     
     # plot the top 20 bigrams
     labels, values = zip(*top_bigrams)
-    plt.barh(range(len(labels)), values, color='pink', height=0.9)
-    plt.title('20 Most frequently occuring bestseller bigrams')
-    plt.ylabel('Bigram')
-    plt.xlabel('# Occurrences')
+    plt.barh(range(len(labels)), values, color='skyblue', height=0.9)
+    plt.title('20 Most Frequently Occuring Bestseller Bigrams(Groups of Two Words)')
+    plt.ylabel('Number of Bigram')
+    plt.xlabel('Occurrences')
     plt.yticks(range(len(labels)), [' '.join(label) for label in labels])
     plt.savefig('pink_bigrams', dpi=500)
     plt.show()
@@ -205,20 +210,21 @@ def chi_sq(a, b):
     and runs a chi^2 test to determine if the the two variables are independent of 
     each other and prints the results based on the findings.
     '''
+    # Setting an alpha value for the if statement below
     alpha = 0.05
-    
+    # Creating the crosstsb of the two features
     result = pd.crosstab(a, b)
-
+    # Running the actual function to determine the chi squared value
     chi2, p, degf, expected = stats.chi2_contingency(result)
-
+    
+    print('--------------------------')
     print(f'Chi-square  : {chi2:.4f}') 
-    print("")
-    print(f'P-value : {p:.4f}')
-    print("")
+    print(f'P-value     : {p:.4f}')
+    print('--------------------------')
     if p / 2 > alpha:
         print("We fail to reject the null hypothesis.")
     else:
-        print(f'We reject the null hypothesis ; there is a relationship between the target variable and the feature examined.')
+        print(f'We reject the null hypothesis; there is a relationship between the target variable and the feature examined.')
 
 #-------------------------------------------------------
 
@@ -231,11 +237,12 @@ def book_len_success(train):
     the target ('successful') against the length in 
     pages of each book. it puts out a barplot.
     '''
+    sns.set_style("darkgrid", {"grid.color": ".6", "grid.linestyle": ":"})
     plt.figure(figsize=(8, 5))
 
     plt.title('Success Of Book Based On Average Page Length')
 
-    graphed = sns.barplot(x = train['successful'], y = train['length'], palette = 'CMRmap')
+    graphed = sns.barplot(x = train['successful'], y = train['length'], palette = 'deep')
 
     # set xtick labels and properties
     plt.xticks([0, 1], 
@@ -265,16 +272,18 @@ def pearsonr_report(group1, group2):
     alpha = .05
     seed = 42
 
+    print('--------------------------')
     print(f'Correlation = {corr:.4f}') 
-    print(f'p-value     = {p}')
-
+    print(f'p-value     = {p:.4f}')
+    print('--------------------------')
     print('Is p-value < alpha?', p < alpha)
 
 #-------------------------------------------------------
 
 def sent_vs_len(train):
 
-    sns.scatterplot(data=train, x='length', y='compound', hue='successful')
+    sns.set_style("darkgrid", {"grid.color": ".6", "grid.linestyle": ":"})
+    sns.scatterplot(data=train, x='length', y='compound', hue='successful', palette='deep')
 
     plt.title('Comparing Book Length to the Compound Sentiment Score')
     plt.xlabel('Book Length')

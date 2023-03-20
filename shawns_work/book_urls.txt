@@ -189,8 +189,8 @@
 22463.The_Origin_of_Species
 16981.Invisible_Man
 10959.Sophie_s_World
-6969.Emma
 28862.The_Prince
+6969.Emma
 22917.The_Complete_Grimm_s_Fairy_Tales
 17690.The_Trial
 472331.Watchmen
@@ -231,8 +231,8 @@
 5659.The_Wind_in_the_Willows
 439288.Speak
 34268.Peter_Pan
-2767.A_People_s_History_of_the_United_States
 30289.The_Republic
+2767.A_People_s_History_of_the_United_States
 7069.The_World_According_to_Garp
 30165203-american-gods
 38709.Holes
@@ -240,8 +240,8 @@
 99561.Looking_for_Alaska
 514811.The_Secret_Magdalene
 44767458-dune
-8921.The_Hound_of_the_Baskervilles
 37781.Things_Fall_Apart
+8921.The_Hound_of_the_Baskervilles
 12067.Good_Omens
 58572970-the-addiction-manifesto
 21.A_Short_History_of_Nearly_Everything
@@ -308,8 +308,8 @@
 46170.For_Whom_the_Bell_Tolls
 58696.David_Copperfield
 2.Harry_Potter_and_the_Order_of_the_Phoenix
-5060378-the-girl-who-played-with-fire
 8664353-unbroken
+5060378-the-girl-who-played-with-fire
 3412.The_Thorn_Birds
 629.Zen_and_the_Art_of_Motorcycle_Maintenance
 12898.Death_of_a_Salesman
@@ -336,8 +336,8 @@
 77727.Calvin_and_Hobbes
 6150.Cry_the_Beloved_Country
 36402034-do-androids-dream-of-electric-sheep
-16631.Steppenwolf
 12957.Much_Ado_About_Nothing
+16631.Steppenwolf
 9293020-the-elephant-tree
 280111.Holy_Bible
 14706.Faust_First_Part
@@ -355,9 +355,9 @@
 161744.Common_Sense
 1554.Oedipus_Rex
 122.The_Power_of_One
+40604658-jurassic-park
 248596.Something_Wicked_This_Way_Comes
 19288043-gone-girl
-40604658-jurassic-park
 35545737-a-walk-to-remember
 50.Hatchet
 11387515-wonder
