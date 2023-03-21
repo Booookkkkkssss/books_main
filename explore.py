@@ -139,12 +139,12 @@ def uni_id_best_seller(train):
      [['p_unsuccessful', 'p_best']]
      .tail(10)
      .sort_values('p_best')
-     .plot.barh(stacked=True),
+     .plot.barh(stacked=False, color=['#F1948A', '#85C1E9']),
            
      plt.title('Common Words in Positively Aligned Summaries'),
      plt.xlabel('Probability of Appearing'),
      plt.ylabel('Word'),
-     plt.legend(title='Successful Book', loc = 'upper right', labels=['No', 'Yes']))
+     plt.legend(title='Successful', loc = 'upper right', labels=['No', 'Yes']))
 
      )
     
