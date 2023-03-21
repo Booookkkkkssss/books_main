@@ -154,6 +154,7 @@ def uni_id_best_seller(train):
 
 def best_bigrams(best):
     
+    
     # this creates a long sentence of all summaries
     best_sent = (' '.join(best.lemmatized_summary))
     
@@ -165,16 +166,28 @@ def best_bigrams(best):
     
     # sort the bigrams based on their count
     top_bigrams = sorted(bigram_counts.items(), key=lambda x: x[1], reverse=True)[:20]
-    
-    # plot the top 20 bigrams
+
     labels, values = zip(*top_bigrams)
-    plt.barh(range(len(labels)), values, height=0.9, color=color1)
-    plt.title('20 Most Frequently Occuring Bestseller Bigrams(Groups of Two Words)')
-    plt.ylabel('Number of Bigram')
-    plt.xlabel('Occurrences')
-    plt.yticks(range(len(labels)), [' '.join(label) for label in labels])
+
+    values = sorted(values)
+    def reverse(tuples):
+        new_tup = tuples[::-1]
+        return new_tup
+    labels = reverse(labels)
+    
+    #labels = reversed(labels)
+
+    plt.figure(figsize=(10, 8))
+    plt.barh(range(len(labels)), values, color= '#85C1E9', height=0.9)
+    plt.yticks(range(len(labels)), [' '.join(label) for label in labels], fontsize=10)
+    plt.title('20 Most frequently occuring bestseller bigrams', fontsize=16)
+    plt.xlabel('# Occurrences', fontsize=12)
+    plt.ylabel('Bigram', fontsize=12)
+
+    plt.tight_layout()
     plt.savefig('pink_bigrams', dpi=500)
     plt.show()
+    
     
 #-------------------------------------------------------
 
