@@ -15,7 +15,11 @@ from scipy import stats
 from scipy.stats import norm, binom, pearsonr
 from collections import Counter
 
-sns.set_style("darkgrid", {"grid.color": ".6", "grid.linestyle": ":"})
+color1 = '#0e3afa'
+color2 = '#68fd7f'  
+color3 = '#CD5C5C'
+
+sns.set_style('whitegrid')
 
 seed = 42
 
@@ -89,7 +93,7 @@ def explore_question_2_visuals(df):
     
     # create the horizontal count plot
     plt.figure(figsize=(10, 6))
-    sns.barplot(x=df.columns[1], y=df.columns[0], data=df.head(15), palette="deep")
+    sns.barplot(x=df.columns[1], y=df.columns[0], data=df.head(15), palette=[color1, color2, color3])
     plt.title(f'Frequency of {df.columns[0]}')
     plt.xlabel(df.columns[1])
     plt.ylabel(df.columns[0])
@@ -164,7 +168,7 @@ def best_bigrams(best):
     
     # plot the top 20 bigrams
     labels, values = zip(*top_bigrams)
-    plt.barh(range(len(labels)), values, color='skyblue', height=0.9)
+    plt.barh(range(len(labels)), values, height=0.9, color=color1)
     plt.title('20 Most Frequently Occuring Bestseller Bigrams(Groups of Two Words)')
     plt.ylabel('Number of Bigram')
     plt.xlabel('Occurrences')
@@ -180,7 +184,7 @@ def jointplot_viz(train):
             for col1 in nums.columns:
                 if col1 == 'number_of_ratings' or col1 == 'review_count'or col == 'rating':
                     plt.figure() # create a new figure for each plot
-                    sns.jointplot(data=nums, x=col, y= col1, hue= 'target')
+                    sns.jointplot(data=nums, x=col, y= col1, hue= 'target', palette=[color1, color2])
                     plt.title(f"Scatterplot of {col} vs. {col1}")
                     plt.show()
 
@@ -242,7 +246,8 @@ def book_len_success(train):
 
     plt.title('Success Of Book Based On Average Page Length')
 
-    graphed = sns.barplot(x = train['successful'], y = train['length'], palette = 'deep')
+    graphed = sns.barplot(x = train['successful'], y = train['length'], palette=[color1, color2]
+)
 
     # set xtick labels and properties
     plt.xticks([0, 1], 
@@ -283,7 +288,7 @@ def pearsonr_report(group1, group2):
 def sent_vs_len(train):
 
     sns.set_style("darkgrid", {"grid.color": ".6", "grid.linestyle": ":"})
-    sns.scatterplot(data=train, x='length', y='compound', hue='successful', palette='deep')
+    sns.scatterplot(data=train, x='length', y='compound', hue='successful', palette=[color1, color2])
 
     plt.title('Comparing Book Length to the Compound Sentiment Score')
     plt.xlabel('Book Length')

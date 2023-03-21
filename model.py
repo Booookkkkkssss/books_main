@@ -19,6 +19,12 @@ from sklearn.metrics import auc
 
 import prepare as pr 
 
+color1 = '#0e3afa'
+color2 = '#68fd7f'  
+color3 = '#CD5C5C'
+
+sns.set_style('whitegrid')
+
 seed = 42
 #--------------------------------------------------------
 
@@ -196,10 +202,10 @@ def roc(y_test, y_pred):
 
 
     fpr, tpr, thresholds = roc_curve(y_test['successful'], y_pred)
-    plt.plot(fpr, tpr, color='blue', lw=2, label=f'XGBClassifer (area = %0.4f)' % auc(fpr, tpr))
+    plt.plot(fpr, tpr, color=color1, lw=2, label=f'XGBClassifer (area = %0.4f)' % auc(fpr, tpr))
 
     fpr, tpr, thresholds = roc_curve(y_test['successful'], y_test['baseline'])
-    plt.plot(fpr, tpr, color='red', lw=2, label=f'Baseline (area = %0.4f)' % auc(fpr, tpr))
+    plt.plot(fpr, tpr, color=color2, lw=2, label=f'Baseline (area = %0.4f)' % auc(fpr, tpr))
 
 
     plt.xlim([0.0, 1.0])
