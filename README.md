@@ -13,7 +13,7 @@
 
 # :star: Goal
 
-Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, this project aims to acquire, explore and analyse information about books — their popularity, ratings, reviews, keywords, author name, publisher and more – to programmatically determine which factors lead to a book landing on the The New York Times Best Sellers list.
+Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, this project aims to acquire, explore and analyse information about books — their popularity, ratings, reviews, keywords, author name, publisher and more – to programmatically determine which factors lead to a book landing on the the _New York Times_ Best Sellers list.
 
 ## Data Dictionary
 
@@ -30,7 +30,7 @@ Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, t
 |**reviews**|          text of users' publically available book reviews, when available, up to 10 per book|  
 |**cleaned_title**|    book title after normalizing, encoding, decoding and passing through a RegEx statement|  
 |**cleaned_summary**|  official Goodreads summary of the book after normalizing, encoding, decoding and passing through a RegEx statement|  
-|**successful**|           engineered feature indicating whether the book appeared ('bestseller' or 'unsuccessful'), since 1931, on the New York Times Best Seller list|  
+|**successful**|           engineered feature indicating whether the book appeared ('bestseller' or 'unsuccessful'), since 1931, on the _New York Times_ Best Seller list|  
 |**lemmatized_summary**|lemmatized text of the official Goodreads summary of the book|  
 |**neg**|          negative leaning of the sentiment score, based on the official Goodreads summary of the book|  
 |**neutral**|     neutral position of the sentiment score, based on the official Goodreads summary of the book|  
@@ -50,7 +50,7 @@ Using publically visible data from Goodreads, Wikipedia and Amazon via GitHub, t
 
 1.  Which words/ngrams appear more often in summaries with a positive sentiment?  
 2.  Which words/ngrams appear more often in summaries with a negative sentiment?  
-3.  Do authors who appear once on the The New York Times Best Sellers list have a higher likelihood of repeat success?   
+3.  Do authors who appear once on the the _New York Times_ Best Sellers list have a higher likelihood of repeat success?   
 4.  Which combination of features led a higher chance of appearing on the NYT Best Seller list?   
 
 ### :dizzy: Project Plan / Process
