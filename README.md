@@ -125,7 +125,7 @@ Questions initially identified during project discussion sessions were refined d
 #### :four:   Modeling And Evaluation
 
 <details open>
-<summary> `TF-IDF`, `Decision Tree`, `XGB Classifier`  </summary>
+<summary> TF-IDF, Decision Tree, XGB Classifier  </summary>
 </details>
   
 <details>
