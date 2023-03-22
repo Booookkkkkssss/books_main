@@ -151,15 +151,15 @@ Using recall as the target metric with the XGBoost Classifier on the scaled test
    
 * NYT Best Seller books had, on average, a longer page count than non-bestsellers.   
 * The negativity or the positivity of the book summary sentiment score had little-to-no relationship to the number of ratings a book received.   
-* J.D. Robb and Stephen King were top-performing authors from both the random assortment of books and on the New York Times Best Seller list.  
+* J.D. Robb and Stephen King were top-performing authors from both the random assortment of books and on the _New York Times_ Best Seller list.  
 
 </details>
 
 # Recommendations
 
-Pay attention to the style of books written by authors whose books frequently appear on the New York Times Best Seller list.  
+Pay attention to the style of books written by authors whose books frequently appear on the _New York Times_ Best Seller list.  
 
-As a publisher, make effort to get as many Goodreads ratings as possible, as the higher the number of reader ratings on Goodreads, the higher the overall star rating score and the more likely the book was to be on the New York Times Best Seller list.  
+As a publisher, make effort to get as many Goodreads ratings as possible, as the higher the number of reader ratings on Goodreads, the higher the overall star rating score and the more likely the book was to be on the _New York Times_ Best Seller list.  
 
 ## :electron: Next Steps
 
@@ -192,10 +192,10 @@ As a publisher, make effort to get as many Goodreads ratings as possible, as the
 
 <details>
     
-1. The NYT measures sales from specific, confidential vendors (online & in-person) offering ‘a wide range of general interest titles’ in the US. It is not a measurement of which books are selling the most copies, overall.   
-Bulk sales, if the NYT book review dept decides to include them, are indicated by a † next to the book title on the list.  
+1. The _New York Times_ measures sales from specific, confidential vendors (online & in-person) offering ‘a wide range of general interest titles’ in the US. It is not a measurement of which books are selling the most copies, overall.   
+Bulk sales, if the NYT book review department decides to include them, are indicated by a † next to the book title on the list.  
 
-2. Institutional sales, perennial sellers, textbooks, classroom reading, reference material, etc, is not included. The NYT requires that 5000–10 000 books be sold in a week by reporting vendors, in order to be included on the list.   
+2. Institutional sales, perennial sellers, textbooks, classroom reading, reference material, etc, is not included. The NYT requires that 5000 to 10 000 books be sold in a week by reporting vendors, in order to be included on the list.   
 
 3. Ebooks were first included on 13 FEB 2011.  
 
@@ -205,27 +205,26 @@ Bulk sales, if the NYT book review dept decides to include them, are indicated b
 
 6. It’s been said that the NYC Best Seller list is a ‘self-validating’ list, as NYT has editorial discretion over which books appear on the list.  
 
-7. This is supported by the 1983 lawsuit by Exorcist author William Peter Blatty, where he lost his case for the high sales of his book ‘Legion’ against the NYT. Supreme Court ruled that NYT’s Best Seller list publication was protected under the First Amendment, and was an editorial product, not ‘an object compilation of information’.   
+7. This is supported by the 1983 lawsuit by _The Exorcist_ author William Peter Blatty, where he lost his case for the high sales of his book _Legion_ against the NYT. Supreme Court ruled that NYT’s Best Seller list publication was protected under the First Amendment, and was an editorial product, not ‘an object compilation of information’.   
 
-8. It’s been called a catch-22, because it’s useful for marketing purposes by publishers, but the list serves as more of a cultural, than a scientific, authority.  
+8. The list has been called a catch-22, because it’s useful for marketing purposes by publishers, but the list has also been said to serve as more of a cultural, than a scientific, authority.  
 
-9. The Big Five publishers : Penguin Random House, Hachette, HarperCollins, Macmillan, Simon & Schuster. They control +80% of the US publishing market.  
+9. The Big Five publishers: Penguin Random House, Hachette, HarperCollins, Macmillan, Simon & Schuster. They control +80% of the US publishing market.  
 
 **Sources:**    
-About the Best Sellers, https://www.nytimes.com/books/best-sellers/methodology/
+[About the Best Sellers](https://www.nytimes.com/books/best-sellers/methodology/)
       
-Book History, Volume 3 (published year 2000), https://www.google.com/books/edition/_/PEZkkbohbtoC?hl=en&gbpv=1&pg=PA297&dq=%E2%80%9Cthe+list+did+not+purport+to+be+an+objective+compilation+of+information+but+instead+was+an+editorial
+[Book History, Volume 3 (published year 2000)](https://www.google.com/books/edition/_/PEZkkbohbtoC?hl=en&gbpv=1&pg=PA297&dq=%E2%80%9Cthe+list+did+not+purport+to+be+an+objective+compilation+of+information+but+instead+was+an+editorial)
   
-How To Get On The NY Times & Every Other Bestseller Book List, https://scribemedia.com/get-best-seller-list/     
+[How To Get On The NY Times & Every Other Bestseller Book List](https://scribemedia.com/get-best-seller-list/)     
   
-How to Get on the New York Times Bestseller List, https://self-publishingschool.com/get-on-the-new-york-times-bestseller-list/   
+[How to Get on the New York Times Bestseller List](https://self-publishingschool.com/get-on-the-new-york-times-bestseller-list/)   
   
-Stanford Business Archive : Readers Tap Best-Seller List for New Authors (February 2005)  
-https://web.archive.org/web/20060920180813/https://www.gsb.stanford.edu/news/bmag/sbsm0502/research_sorensen_consumers.shtml  
+[Stanford Business Archive: Readers Tap Best-Seller List for New Authors (February 2005)](https://web.archive.org/web/20060920180813/https://www.gsb.stanford.edu/news/bmag/sbsm0502/research_sorensen_consumers.shtml)  
   
-The Big Five Publishers and Their Imprints (23 Nov 2022), https://www.9thstreetbooks.com/big-five-publishers-and-imprints/   
+[The Big Five Publishers and Their Imprints (23 Nov 2022)](https://www.9thstreetbooks.com/big-five-publishers-and-imprints/)   
     
-The Murky Path To Becoming a New York Times Best Seller (09 Dec 2022), https://www.esquire.com/entertainment/books/a42189320/the-new-york-times-best-seller-lists-explained/       
+[The Murky Path To Becoming a New York Times Best Seller (09 Dec 2022)](https://www.esquire.com/entertainment/books/a42189320/the-new-york-times-best-seller-lists-explained/)       
 
 All accessed 20 March 2023.
 
