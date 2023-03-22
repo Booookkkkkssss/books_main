@@ -188,3 +188,49 @@ As a publisher, make effort to get as many Goodreads ratings as possible, as the
 </details>
 
 
+### Summary Of NYT Best Seller List Methodologies:  
+
+<details>
+    
+1. The NYT measures sales from specific, confidential vendors (online & in-person) offering ‘a wide range of general interest titles’ in the US. It is not a measurement of which books are selling the most copies, overall.   
+Bulk sales, if the NYT book review dept decides to include them, are indicated by a † next to the book title on the list.  
+
+2. Institutional sales, perennial sellers, textbooks, classroom reading, reference material, etc, is not included. The NYT requires that 5000–10 000 books be sold in a week by reporting vendors, in order to be included on the list.   
+
+3. Ebooks were first included on 13 FEB 2011.  
+
+4. Partner vendors report completed transactions for a given book to the NYT, which includes the book’s ISBN13 / EISBN13. The NYT can and may independently verify the sales data.  
+
+5. NYT lists book publishers on the list by their corporate publisher name, not (exceptions exist) by imprint or division.  
+
+6. It’s been said that the NYC Best Seller list is a ‘self-validating’ list, as NYT has editorial discretion over which books appear on the list.  
+
+7. This is supported by the 1983 lawsuit by Exorcist author William Peter Blatty, where he lost his case for the high sales of his book ‘Legion’ against the NYT. Supreme Court ruled that NYT’s Best Seller list publication was protected under the First Amendment, and was an editorial product, not ‘an object compilation of information’.   
+
+8. It’s been called a catch-22, because it’s useful for marketing purposes by publishers, but the list serves as more of a cultural, than a scientific, authority.  
+
+9. The Big Five publishers : Penguin Random House, Hachette, HarperCollins, Macmillan, Simon & Schuster. They control +80% of the US publishing market.  
+
+**Sources:**    
+About the Best Sellers, https://www.nytimes.com/books/best-sellers/methodology/
+      
+Book History, Volume 3 (published year 2000), https://www.google.com/books/edition/_/PEZkkbohbtoC?hl=en&gbpv=1&pg=PA297&dq=%E2%80%9Cthe+list+did+not+purport+to+be+an+objective+compilation+of+information+but+instead+was+an+editorial
+  
+How To Get On The NY Times & Every Other Bestseller Book List, https://scribemedia.com/get-best-seller-list/     
+  
+How to Get on the New York Times Bestseller List, https://self-publishingschool.com/get-on-the-new-york-times-bestseller-list/   
+  
+Stanford Business Archive : Readers Tap Best-Seller List for New Authors (February 2005)  
+https://web.archive.org/web/20060920180813/https://www.gsb.stanford.edu/news/bmag/sbsm0502/research_sorensen_consumers.shtml  
+  
+The Big Five Publishers and Their Imprints (23 Nov 2022), https://www.9thstreetbooks.com/big-five-publishers-and-imprints/   
+    
+The Murky Path To Becoming a New York Times Best Seller (09 Dec 2022), https://www.esquire.com/entertainment/books/a42189320/the-new-york-times-best-seller-lists-explained/       
+
+All accessed 20 March 2023.
+
+
+
+</details>
+
+
