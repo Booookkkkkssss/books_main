@@ -58,7 +58,7 @@ def get_most_common_negative_ngrams(train, n, top_n):
     df_neg = train[train['sentiment'].isin(['negative', 'very negative'])]
     
     # Tokenize words
-    words = df_neg['cleaned_summary'].str.lower().str.cat(sep=' ').split()
+    words = df_neg['lemmatized_summary'].str.lower().str.cat(sep=' ').split()
 
     # Create a list of additional stopwords
     additional_stopwords = ['.']
