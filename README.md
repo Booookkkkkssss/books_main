@@ -139,7 +139,7 @@ Questions initially identified during project discussion sessions were refined d
 Initial models attempted included XBG regressor, random forest and XGBoost; these returned extremely low recall scores and were deemed unsuitable, leading to the use of the XGBoost classifier. However, due to time constraints and the hours needed in running the XGBoost Classifier on features including the book summary IDF word score, it was deemed wiser to put the inclusion of the IDF word score on hold. Instead, the XGBoost was used on the categorical features excluding the IDF. Before running, dummies for sentiment and genre were made on the original dataframe, the data was split into train and test, the train data was split into X_train and y_train, and then scaled.  
     
 **Evaluation**    
-Using recall as the target metric with the XGBoost Classifier on the scaled test dataset, the model correctly identified 11 bestsellers known to be bestsellers and 693 non-bestsellers predicted as non-bestsellers. Of all the titles, 21 bestsellers were predicted as non-bestsellers. This produced a recall (false-positives) score of about 34%. Out of all the non-bestsellers, however, only 8 were incorrectly predicted to be bestsellers. This led to an accuracy score of 96%.
+Using recall as the target metric with the XGBoost Classifier on the scaled test dataset, the model correctly identified 21 bestsellers known to be bestsellers and 693 non-bestsellers predicted as non-bestsellers. Of all the titles, 21 bestsellers were predicted as non-bestsellers. This produced a recall (false-positives) score of about 50%. Out of all the non-bestsellers, however, only 11 were incorrectly predicted to be bestsellers. This led to an accuracy score of 96%.
   
 </details>
 
