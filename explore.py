@@ -187,8 +187,7 @@ def best_bigrams(best):
     plt.tight_layout()
     plt.savefig('pink_bigrams', dpi=500)
     plt.show()
-    
-    
+        
 #-------------------------------------------------------
 
 def jointplot_viz(train):
@@ -301,7 +300,7 @@ def pearsonr_report(group1, group2):
 def sent_vs_len(train):
 
     sns.set_style("darkgrid", {"grid.color": ".6", "grid.linestyle": ":"})
-    sns.scatterplot(data=train, x='length', y='compound', hue='successful', palette=[color1, color2])
+    sns.scatterplot(data=train, x='length', y='compound', hue='successful', palette=[color1, color3])
 
     plt.title('Comparing Book Length to the Compound Sentiment Score')
     plt.xlabel('Book Length')
