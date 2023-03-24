@@ -24,7 +24,7 @@ def prep_data(filename):
     clean_article(df, 'title')
     clean_article(df, 'summary')
     
-    df1 = pd.read_csv('books_feat_on_NYBS', index_col=0)
+    df1 = pd.read_csv('fiction-and-non-fiction-top-best-sellers.csv', index_col=0)
     clean_article(df1, 'Book')
     ser = df1['cleaned_Book']
     
