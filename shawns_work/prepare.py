@@ -120,7 +120,9 @@ def lemmatize_text(text):
     # Stop words
     extra_stop_words = ['book', 'novel', 'work', 'title', 'character', 
               'fuck', 'asshole', 'bitch', 'cunt', 'dick', 'fucking',
-             'fucker', 'pussy', 'fag', 'edition', 'story', 'tale', 'genre', 'new york times', 'ny times', 'nyt']
+              'fucker', 'pussy', 'fag', 'edition', 'story', 'tale', 
+              'genre', 'new york times', 'ny times', 'nyt', 'new', 'york',
+              'times', 'bestseller', 'author', 'bestselling', 'one', 'two']
     
     stop_words = set(stopwords.words('english')) | set(extra_stop_words)
     #intialize the lemmatizer
