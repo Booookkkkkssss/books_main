@@ -24,30 +24,33 @@ def prep_data(filename):
     clean_article(df, 'title')
     clean_article(df, 'summary')
     
-    df1 = pd.read_csv('fiction-and-non-fiction-top-best-sellers.csv', index_col=0)
-    clean_article(df1, 'Book')
-    ser = df1['cleaned_Book']
+    df1 = pd.read_csv('weekend_dataset', index_col=0)
+    clean_article(df1, 'book')
+    ser = df1['cleaned_book']
     
     creat_tar(df, ser)
     
-    
-    df.loc[[3806], ['length']] = 320
-    df.loc[[3807], ['length']] = 407
-    df.loc[[3808], ['length']] = 368
-    df.loc[[3809], ['length']] = 920
-    
     genre_counts = df['genre'].value_counts()
     genres_to_remove = genre_counts[genre_counts < 8].index
+    
     # remove the rows with those genres "filtering"
     df = df[~df['genre'].isin(genres_to_remove)]
     
+    # dropping picture books
     df = df[df['genre'] != 'Picture Books']
     
+    # cleaning, lemmatising, sentimenting the book summaries
     df['lemmatized_summary'] = df['cleaned_summary'].apply(lemmatize_text)
-    df[['neg', 'neutral', 'pos', 'compound']] = df['summary'].apply(feat_sent)
-    df['sentiment'] = df['compound'].apply(get_sentiment)
-    
+    df[['neg_sum', 'neutral_sum', 'pos_sum', 'compound_sum']] = df['summary'].apply(feat_sent)
+    df['sentiment_sum'] = df['compound_sum'].apply(get_sentiment)
+
+    # cleaning, lemmatising, sentimenting the reviews
+    df['lemmatized_review'] = df['cleaned_review'].apply(lemmatize_text)
+    df[['neg_rev', 'neutral_rev', 'pos_rev', 'compound_rev']] = df['reviews'].apply(feat_sent)
+    df['sentiment_rev'] = df['compound_rev'].apply(get_sentiment)
+
     return df
+
 
 #-----pulling_the_data----------------------
 
