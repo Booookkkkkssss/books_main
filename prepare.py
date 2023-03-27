@@ -44,11 +44,6 @@ def prep_data(filename):
     df[['neg_sum', 'neutral_sum', 'pos_sum', 'compound_sum']] = df['summary'].apply(feat_sent)
     df['sentiment_sum'] = df['compound_sum'].apply(get_sentiment)
 
-    # cleaning, lemmatising, sentimenting the reviews
-    df['lemmatized_review'] = df['cleaned_review'].apply(lemmatize_text)
-    df[['neg_rev', 'neutral_rev', 'pos_rev', 'compound_rev']] = df['reviews'].apply(feat_sent)
-    df['sentiment_rev'] = df['compound_rev'].apply(get_sentiment)
-
     return df
 
 

@@ -19,20 +19,38 @@ def prep_data(filename):
     
     df = get_data(filename)
     
+    df.drop(columns='index')
+    
     clean_article(df, 'title')
     clean_article(df, 'summary')
+    clean_article(df, 'reviews')
     
-    df1 = pd.read_csv('books_feat_on_NYBS', index_col=0)
+    df1 = pd.read_csv('fiction-and-non-fiction-top-best-sellers.csv', index_col=0)
+    
     clean_article(df1, 'Book')
     ser = df1['cleaned_Book']
     
     creat_tar(df, ser)
     
+    # convert 'year' column to string type using .astype()
+    df['year'] = df['year'].astype(str)
+    # extract the year from the 'year' column using the lambda function
+    df['year'] = df['year'].apply(lambda x: x[-4:])
     
-    df.loc[[3806], ['length']] = 320
-    df.loc[[3807], ['length']] = 407
-    df.loc[[3808], ['length']] = 368
-    df.loc[[3809], ['length']] = 920
+    # use regex on col to isolate page length
+    df['length'] = [re.findall(r'\d', str(x)) for x in df['length']]
+    # join the page numbers together
+    df["length"]= df["length"].str.join("")
+    
+    df.rating = df['year'].astype(str)
+    # remove the last 8 characters from each string and return the result
+    df.rating_count = [s[:-8] for s in df.rating_count]
+    
+    # drop duplicate title-author combos
+    df.drop_duplicates(subset = ['title', 'author'], inplace = True)
+    
+    df.publisher = df.publisher.astype(str)
+    df.publisher = [s.split('by')[1].strip() if len(s.split('by')) > 1 else '' for s in df.publisher]
     
     genre_counts = df['genre'].value_counts()
     genres_to_remove = genre_counts[genre_counts < 8].index
@@ -53,22 +71,16 @@ def get_data(file):
     '''
     Will pull the current data from the 'almost_there' csv file, and prep it for deeper cleaning.
     '''
-    df = pd.read_csv(file, index_col=0)
-    df = df.drop_duplicates(subset='title')
-    
-    save = ['Eleven on Top', 'Winter of the World', 'Nothing to Lose', 'Reflected in You']
-    sub = df[df['length'].isna()]
-    sub1 = sub[sub['title'].isin(save)]
-    df = df.dropna(subset='length')
-    df = pd.concat([df, sub1], axis=0)
-    
-    df = df.dropna(subset='summary')
-    df = df.dropna(subset='year_published')
+    # original df
+    df = pd.read_csv('weekend_dataset.csv', index_col=0)    
+    # combining review cols
+    df['reviews'] = df['Review 1'] + ' ' + df['Review 2'] + ' ' + df['Review 3'] + ' ' + df['Review 4'] + ' ' +  df['Review 5']
+    # dropping unneeded cols
+    df.drop(['Review 1', 'Review 2', 'Review 3', 'Review 4', 'Review 5'], axis = 1, inplace = True)
+    # rename columns
+    df = df.rename(columns={'Book Name':'title','Synopsis':'summary', 'Link':'link', 'page_count':'length'})
     
     df = df.reset_index()
-    df = df.drop(columns=['index', 'book_tag'])
-    
-    df['length'] = df['length'].astype('float')
                                                
     return df
 
