@@ -24,9 +24,9 @@ def prep_data(filename):
     clean_article(df, 'title')
     clean_article(df, 'summary')
     
-    df1 = pd.read_csv('weekend_dataset', index_col=0)
-    clean_article(df1, 'book')
-    ser = df1['cleaned_book']
+    df1 = pd.read_csv('fiction-and-non-fiction-top-best-sellers.csv', index_col=0)
+    clean_article(df1, 'Book')
+    ser = df1['cleaned_Book']
     
     creat_tar(df, ser)
     
@@ -41,8 +41,8 @@ def prep_data(filename):
     
     # cleaning, lemmatising, sentimenting the book summaries
     df['lemmatized_summary'] = df['cleaned_summary'].apply(lemmatize_text)
-    df[['neg_sum', 'neutral_sum', 'pos_sum', 'compound_sum']] = df['summary'].apply(feat_sent)
-    df['sentiment_sum'] = df['compound_sum'].apply(get_sentiment)
+    df[['neg', 'neutral', 'pos', 'compound']] = df['summary'].apply(feat_sent)
+    df['sentiment'] = df['compound'].apply(get_sentiment)
 
     return df
 
