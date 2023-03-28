@@ -185,7 +185,6 @@ def best_bigrams(best):
     plt.ylabel('Bigram', fontsize=12)
 
     plt.tight_layout()
-    plt.savefig('pink_bigrams', dpi=500)
     plt.show()
         
 #-------------------------------------------------------
