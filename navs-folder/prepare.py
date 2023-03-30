@@ -11,19 +11,11 @@ from nltk.stem import WordNetLemmatizer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize 
+from nltk.tokenize import word_tokenize
 
-from sklearn.model_selection import train_test_split
-import sklearn.model_selection
+seed = 42
 
-#------split---------------------------------------
-
-
-def split(df):
-    train, test = train_test_split(df, test_size=.2, random_state=42, stratify=df.target)
-    return train, test
-
-#-------All_in_One--------------------------------------
+#---------------------------------------------
 
 def prep_data(filename):
     
@@ -32,22 +24,34 @@ def prep_data(filename):
     clean_article(df, 'title')
     clean_article(df, 'summary')
     
-    df1 = pd.read_csv('books_feat_on_NYBS', index_col=0)
+    df1 = pd.read_csv('fiction-and-non-fiction-top-best-sellers.csv', index_col=0)
     clean_article(df1, 'Book')
     ser = df1['cleaned_Book']
     
     creat_tar(df, ser)
+    
     
     df.loc[[3806], ['length']] = 320
     df.loc[[3807], ['length']] = 407
     df.loc[[3808], ['length']] = 368
     df.loc[[3809], ['length']] = 920
     
+    genre_counts = df['genre'].value_counts()
+    genres_to_remove = genre_counts[genre_counts < 8].index
+    # remove the rows with those genres "filtering"
+    df = df[~df['genre'].isin(genres_to_remove)]
+    
+    df = df[df['genre'] != 'Picture Books']
+    
     df['lemmatized_summary'] = df['cleaned_summary'].apply(lemmatize_text)
     df[['neg', 'neutral', 'pos', 'compound']] = df['summary'].apply(feat_sent)
     df['sentiment'] = df['compound'].apply(get_sentiment)
     
     return df
+    
+    
+    return df
+
 
 #-----pulling_the_data----------------------
 
@@ -68,14 +72,14 @@ def get_data(file):
     df = df.dropna(subset='year_published')
     
     df = df.reset_index()
-    df = df.drop(columns=['index', 'book_tag'])
+    df = df.drop(columns=['index'])
     
     df['summary'] = df['summary'].astype('string')
     df['title'] = df['title'].astype('string')
     df['author'] = df['author'].astype('string')
     df['genre'] = df['genre'].astype('string')
     df['length'] = df['length'].astype('float')
-
+                                               
     return df
 
 #-----create_target-------------------------
@@ -84,13 +88,14 @@ def creat_tar(df, ser):
     target_list = []
     for index, row in df.iterrows():
         if row['cleaned_title'] in ser.tolist():
-            target_list.append('best seller')
+            target_list.append(1)
         else:
-            target_list.append('unsuccessful')
+            target_list.append(0)
 
     # Add the 'Target' column to the dataframe
-    df['target'] = target_list
-    
+    df['successful'] = target_list
+    df['successful'] = df['successful'].astype(bool)
+
     return df
 
 # -----clean_text---------------
@@ -124,9 +129,11 @@ def lemmatize_text(text):
     """
     # Stop words
     extra_stop_words = ['book', 'novel', 'work', 'title', 'character', 
-              'fuck', 'asshole', 'bitch', 'cunt', 'dick', 'fucking',
-             'fucker', 'pussy', 'fag', 'edition', 'story', 'tale', 'genre','new','york','best','f']
-   
+                        'fuck', 'asshole', 'bitch', 'cunt', 'dick', 'fucking',
+                        'fucker', 'pussy', 'fag', 'edition', 'story', 'tale', 'genre', 
+                        'new york times', 'ny times', 'nyt', 'new', 'york',
+                        'times', 'bestseller', 'author', 'bestselling', 'one', 'two']
+    
     stop_words = set(stopwords.words('english')) | set(extra_stop_words)
     #intialize the lemmatizer
     lemmatizer = WordNetLemmatizer()
